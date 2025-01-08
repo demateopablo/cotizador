@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        document.body.classList.add("visible");
+    }, 100); // Esperamos 100ms antes de iniciar el fade-in
     const productosLista = document.getElementById("productos-lista");
     const totalPrecio = document.getElementById("total-precio");
     const fechaCotizacion = document.getElementById("fecha");

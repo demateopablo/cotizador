@@ -340,3 +340,9 @@ main {
     font-size: 1.3em;
     text-align: right;
 }
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: none;
+}

@@ -1,3 +1,15 @@
+/* Inicialmente ocultamos la página */
+body {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    /* Aumenté a 0.8s para hacerlo más suave */
+}
+
+/* Se aplicará con JS después de un pequeño retraso */
+body.visible {
+    opacity: 1;
+}
+
 main {
     font-family: Arial, sans-serif;
     margin: 40px;

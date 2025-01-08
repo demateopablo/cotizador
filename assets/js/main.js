@@ -8,7 +8,13 @@ const cotizarBtn = document.getElementById("cotizarBtn");
 
 cotizarBtn.addEventListener("click", () => {
     localStorage.setItem("cart", JSON.stringify(cart)); // Guarda el carrito en LocalStorage
-    window.location.href = "cotizacion.html"; // Redirige a la página de cotización
+    // Agrega la clase fade-out a todo el body
+    document.body.classList.add("fade-out");
+
+    // Espera a que termine la animación y luego redirige a la página de cotización
+    setTimeout(() => {
+        window.location.href = "cotizacion.html";
+    }, 1000); // 500ms = igual al tiempo del transition en CSS
 });
 
 // Lista de productos
