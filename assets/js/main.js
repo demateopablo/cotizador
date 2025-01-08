@@ -14,7 +14,7 @@ cotizarBtn.addEventListener("click", () => {
     // Espera a que termine la animación y luego redirige a la página de cotización
     setTimeout(() => {
         window.location.href = "cotizacion.html";
-    }, 1000); // 500ms = igual al tiempo del transition en CSS
+    }, 500); // 500ms = igual al tiempo del transition en CSS
 });
 
 // Lista de productos
