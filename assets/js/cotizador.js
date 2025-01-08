@@ -47,3 +47,8 @@ volver.addEventListener("click", () => {
     localStorage.removeItem("cart");// Borra el carrito en LocalStorage
     window.location.href = "index.html"; // Redirige a la página de cotización
 });
+
+const descargarPDFBtn = document.getElementById("descargarPDF");
+descargarPDFBtn.addEventListener("click", () => {
+    window.print();
+});

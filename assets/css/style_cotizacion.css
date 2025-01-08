@@ -16,6 +16,7 @@
 
 /* Inicialmente ocultamos la página */
 body {
+    min-width: 900px;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
     /* Aumenté a 0.8s para hacerlo más suave */
@@ -101,4 +102,24 @@ th {
 #volver:hover {
     background-color: var(--color-boton);
     color: #FFF
+}
+
+.btn-descargar {
+    display: block;
+    margin: 15px auto;
+    padding: 10px 10px;
+    font-size: 16px;
+    color: white;
+    background-color: var(--color-titulos);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+}
+
+.btn-descargar:hover {
+    background-color: var(--color-boton);
 }
