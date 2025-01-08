@@ -1,13 +1,34 @@
+/* Variables de colores */
+:root {
+    --color-fondo-principal: #e9dcdc;
+    /* Gris medio, aporta solidez */
+    --color-fondo-secundario: #ece3e3;
+    /* Fondo más claro, evita contrastes bruscos */
+    --color-fondo-principal2: #c8c8c8;
+    /* Intermedio entre ambos fondos */
+    --color-boton: #d22a2a;
+    /* Rojo fuerte pero elegante */
+    --color-titulos: #8B0000;
+    /* Rojo más oscuro, aporta sofisticación */
+    --color-texto: #333333;
+    /* Gris oscuro para legibilidad */
+}
+
 /* Inicialmente ocultamos la página */
 body {
     opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
     /* Aumenté a 0.8s para hacerlo más suave */
 }
 
 /* Se aplicará con JS después de un pequeño retraso */
 body.visible {
     opacity: 1;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
 }
 
 main {
@@ -23,7 +44,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #061df9;
+    border-bottom: 2px solid var(--color-boton);
     padding-bottom: 10px;
 }
 
@@ -54,7 +75,7 @@ td {
 }
 
 th {
-    background-color: hsl(0, 91%, 52%);
+    background-color: var(--color-boton);
     color: white;
 }
 
@@ -72,4 +93,12 @@ th {
     margin: 16px;
     font-size: 1.2em;
     cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all .5s ease;
+}
+
+#volver:hover {
+    background-color: var(--color-boton);
+    color: #FFF
 }
