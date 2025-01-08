@@ -7,6 +7,7 @@ const precioTotal = document.getElementById(`precioTotal`);
 const cotizarBtn = document.getElementById("cotizarBtn");
 
 cotizarBtn.addEventListener("click", () => {
+    localStorage.clear();
     localStorage.setItem("cart", JSON.stringify(cart)); // Guarda el carrito en LocalStorage
     // Agrega la clase fade-out a todo el body
     document.body.classList.add("fade-out");
