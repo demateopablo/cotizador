@@ -29,7 +29,7 @@ productos.forEach((producto) => {
     row.innerHTML = `
     <td>${producto.quantity}</td>
     <td>${producto.name}</td>
-    <td>${producto.description}</td>
+    <td>${producto.description===undefined?``:`${producto.description}`}</td>
     <td>$${producto.price.toFixed(2)}</td>
     <td>${total.toFixed(2)}</td>
   `;
