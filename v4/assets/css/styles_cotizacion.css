@@ -1,0 +1,135 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+#cotizacion {
+    max-width: 800px;
+    margin: 0px auto;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+}
+
+.logo {
+    height: 100px;
+}
+
+.presupuesto {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+    height: 100%;
+    justify-self: center;
+    display: flex;
+    color: #8B0000
+}
+
+.company-info {
+    text-align: right;
+    font-size: 12px;
+}
+
+h2 {
+    text-align: center;
+    color: #000000;
+    font-size: 1.2em;
+}
+
+h3 {
+    color: #8B0000;
+    border-bottom: 2px solid #d22a2a;
+    padding-bottom: 5px;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.info-table th,
+.info-table td {
+    padding: 5px 10px;
+    border: 1px solid #8B0000;
+    text-align: left;
+    vertical-align: top;
+}
+
+.info-table p {
+    margin: 5px;
+}
+
+.info-table th {
+    background-color: #e9dcdc;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 25px;
+}
+
+input:valid{
+    border: 1px solid darkgreen;
+}
+
+input:invalid{
+    border: 1px solid red;
+}
+
+select {
+    padding: 0
+};
+
+#productos-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#productos-table th,
+#productos-table td {
+    border: 1px solid #8B0000;
+    padding: 10px;
+    text-align: left;
+}
+
+#productos-table th {
+    background-color: #e9dcdc;
+    font-weight: bold;
+}
+
+button {
+    background-color: #8B0000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #d22a2a;
+}
