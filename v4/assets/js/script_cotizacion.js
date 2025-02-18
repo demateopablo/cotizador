@@ -4,10 +4,10 @@ document.getElementById("fecha-cotizacion").value = new Date().toLocaleDateStrin
 // Cargar productos desde LocalStorage
 const productos = JSON.parse(localStorage.getItem("cart")) || [
     {
-        cantidad: 1,
-        producto: "-",
-        descripcion: "Sin elementos seleccionados",
-        precioUnitario: 0.00,
+        quantity: 1,
+        name: "-",
+        description: "Sin elementos seleccionados",
+        price: 0.00,
     }
 ];
 
