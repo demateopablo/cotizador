@@ -536,6 +536,7 @@ const exportPdfButton = document.getElementById("export-pdf");
 const modal = document.getElementById("modal");
 const modalText = document.getElementById("modal-text");
 const closeModal = document.querySelector(".close");
+const clearButton = document.querySelector('#clear-search');
 
 exportPdfButton.addEventListener("click", () => {
 
@@ -578,8 +579,9 @@ function loadProducts(filter = "") {
                 card.className = "product-card";
                 card.innerHTML = `
                 <h3 class="titulo-card" data-descripcion="${product.descripcion_formateada}">${product.nombre}</h3>
+                <p><strong>Código:</strong> <span class="codigo-card" title="Clic para copiar al portapapeles">${version.codigo}</span></p>
                 ${version.version != '-' ? `<p><strong>Versión:</strong> ${version.version}</p>` : ""}
-                <p><strong>Código:</strong> ${version.codigo}</p>
+                ${version.chasis != '-' ? `<p><strong>Chasis:</strong> ${version.chasis}</p>` : ""}
                 <p><strong>${version.lineas_separacion ? "Líneas - Separación" : "Capacidad"}:</strong> ${version.lineas_separacion || version.capacidad}</p>
                 <p class="price"><strong>USD</strong> $${version.precio.toFixed(0)}</p>
                 <button onclick="addToCart('${product.nombre}', '${version.codigo}', ${version.precio}, ${JSON.stringify(product.opcionales)}, '${descrip}')">Añadir al carrito</button>
@@ -699,15 +701,42 @@ searchInput.addEventListener("input", () => {
     loadProducts(searchInput.value);
 });
 
+// Limpiar el input al hacer clic en el botón
+clearButton.addEventListener('click', function() {
+    searchInput.value = '';
+    searchInput.dispatchEvent(new Event('input')); // Simula un evento "input" para actualizar el filtrado
+});
+
 // Función para agregar eventos a los títulos de las cards
 function agregarEventosCards() {
-    const titulos = document.querySelectorAll(".titulo-card");
-    titulos.forEach((titulo) => {
-        titulo.addEventListener("click", function () {
-            const descripcion = this.getAttribute("data-descripcion");
-            mostrarModal(descripcion);
+    {
+        const titulos = document.querySelectorAll(".titulo-card");
+        titulos.forEach((titulo) => {
+            titulo.addEventListener("click", function () {
+                const descripcion = this.getAttribute("data-descripcion");
+                mostrarModal(descripcion);
+            });
+        })
+
+        const codigos = document.querySelectorAll(".codigo-card");
+        codigos.forEach((codigo) => {
+            codigo.addEventListener("click", function () {
+                navigator.clipboard.writeText(codigo.innerHTML)
+                .then(() => {
+                    const textoOriginal = codigo.innerText;
+                    codigo.innerText = '¡Copiado!';
+                    setTimeout(() => {
+                        codigo.innerText = textoOriginal; // Restaura el texto después de 2 segundos
+                    }, 1000);
+                    searchInput.value=textoOriginal;
+                    searchInput.dispatchEvent(new Event('input'));
+                })
+                .catch(err => {
+                    console.error('Error al copiar el texto: ', err);
+                });
+            });
         });
-    });
+    }
 }
 
 // Mostrar modal con la descripción correspondiente

@@ -59,6 +59,20 @@ main {
     outline: none;
 }
 
+.clear-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    height: 30px;
+    width: 30px;
+}
+
+.clear-button:hover {
+    background-color: #00000050;
+    border-radius: 50%;
+}
+
 /* Lista de productos */
 .product-grid {
     display: grid;
@@ -231,7 +245,7 @@ main {
     right: 20px;
 }
 
-.titulo-card {
+.titulo-card, .codigo-card {
     cursor: pointer;
     transition: scale .3s ease;
 
