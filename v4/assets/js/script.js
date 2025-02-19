@@ -733,3 +733,12 @@ window.addEventListener("click", function (event) {
 
 // Inicializar la página
 loadProducts();
+
+// Seleccionar el botón y el contenedor del carrito
+const toggleCartButton = document.getElementById("toggle-cart");
+const cartContainer = document.getElementById("cart");
+
+// Escuchar el clic en el botón y alternar la visibilidad del carrito
+toggleCartButton.addEventListener("click", function () {
+    cartContainer.classList.toggle("hidden");
+});

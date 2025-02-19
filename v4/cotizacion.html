@@ -69,10 +69,7 @@
                     <input type="date" required>
                 </td>
                 <td>
-                    <select>
-                        <option>USD</option>
-                        <option>Pesos</option>
-                    </select>
+                    <input type="text" readonly value="USD">
                 </td>
             </tr>
         </table>
@@ -98,6 +95,8 @@
         <p><strong>Subtotal:</strong> <span id="subtotal">0.00</span></p>
         <p><strong>IVA (10.5%):</strong> <span id="iva">0.00</span></p>
         <p><strong>Gran Total:</strong> <span id="total">0.00</span></p>
+        <hr>
+        <p><legend><b>Detalles adicionales:</b></label><textarea name="detalles" id="detalles" placeholder=""></textarea></p>
 
         <button id="download-pdf">Descargar Cotización en PDF</button>
     </div>

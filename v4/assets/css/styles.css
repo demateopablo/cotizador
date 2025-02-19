@@ -55,7 +55,7 @@ main {
 }
 
 .search-bar input:focus {
-    border-color: #ffd700;
+    border-color: #153f27;
     outline: none;
 }
 
@@ -198,23 +198,6 @@ main {
     opacity: 0.9;
 }
 
-/* Responsividad */
-@media (max-width: 768px) {
-    main {
-        flex-direction: column;
-    }
-
-    .product-grid {
-        max-width: 100%;
-    }
-
-    .cart {
-        position: relative;
-        width: 100%;
-        margin-top: 20px;
-    }
-}
-
 /* Estilos del modal */
 .modal {
     display: none;
@@ -256,4 +239,68 @@ main {
         scale: 1.2;
         color: #2c5488
     }
+}
+
+/* Ocultar el botón "Ver carrito" por defecto */
+.cart-toggle {
+    display: none;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+
+    .product-grid {
+        max-width: 100%;
+    }
+
+    .cart {
+        position: relative;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    /* Para pantallas pequeñas (mobile) */
+@media (max-width: 768px) {
+    /* Mostrar el botón "Ver carrito" solo en mobile */
+    .cart-toggle {
+        display: block;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #2e8b57;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 50px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-size: 14px;
+        cursor: pointer;
+        z-index: 2000;
+        transition: background-color 0.3s ease;
+    }
+
+    .cart-toggle:hover {
+        background-color: #246f43;
+    }
+
+    /* Ocultar el carrito en mobile por defecto */
+    .cart {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 80%;
+        background-color: white;
+        overflow-y: auto;
+        z-index: 1999;
+        box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .hidden {
+        display: none;
+    }
+}
 }
