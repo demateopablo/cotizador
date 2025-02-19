@@ -42,6 +42,7 @@ const num_cotizacion = document.getElementById("num_cotizacion");
 // Descargar PDF
 const download_button = document.getElementById("download-pdf");
 
+/*
 //Funcion para exportar a PDF directamente
  download_button.addEventListener("click", () => {
     download_button.classList.add('hidden');
@@ -60,7 +61,7 @@ const download_button = document.getElementById("download-pdf");
     }, 1000);
 });
  
-/*
+*/
 download_button.addEventListener("click", () => {
     download_button.classList.add('hidden');
 
@@ -121,4 +122,4 @@ download_button.addEventListener("click", () => {
             }, 1000);
         });
 });
-*/
+
