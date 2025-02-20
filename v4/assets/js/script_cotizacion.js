@@ -24,19 +24,20 @@ productos.forEach((producto) => {
     <td>${producto.quantity}</td>
     <td>${producto.name}</td>
     <td>${producto.description===undefined?``:`${producto.description}`}</td>
-    <td>${producto.price.toFixed(2)}</td>
-    <td>${total.toFixed(2)}</td>
+    <td>${producto.price.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+    <td>${total.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
   `;
     tbody.appendChild(row);
 });
+
 
 // Calcular totales
 const iva = subtotal * 0.105;
 const total = subtotal + iva;
 
-document.getElementById("subtotal").textContent = subtotal.toFixed(2);
-document.getElementById("iva").textContent = iva.toFixed(2);
-document.getElementById("total").textContent = total.toFixed(2);
+document.getElementById("subtotal").textContent = subtotal.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+document.getElementById("iva").textContent = iva.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+document.getElementById("total").textContent = total.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
 const num_cotizacion = document.getElementById("num_cotizacion");
 // Descargar PDF
