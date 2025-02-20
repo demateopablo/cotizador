@@ -58,6 +58,7 @@ textarea {
     min-height: 50px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    field-sizing: content;
 }
 
 .info-table {
