@@ -23,9 +23,9 @@ productos.forEach((producto) => {
     row.innerHTML = `
     <td>${producto.quantity}</td>
     <td>${producto.name}</td>
-    <td>${producto.description===undefined?``:`${producto.description}`}</td>
-    <td>${producto.price.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-    <td>${total.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+    <td>${producto.description === undefined ? `` : `${producto.description}`}</td>
+    <td>${producto.price.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+    <td>${total.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
   `;
     tbody.appendChild(row);
 });
@@ -35,11 +35,18 @@ productos.forEach((producto) => {
 const iva = subtotal * 0.105;
 const total = subtotal + iva;
 
-document.getElementById("subtotal").textContent = subtotal.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-document.getElementById("iva").textContent = iva.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-document.getElementById("total").textContent = total.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+document.getElementById("subtotal").textContent = subtotal.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+document.getElementById("iva").textContent = iva.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+document.getElementById("total").textContent = total.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 const num_cotizacion = document.getElementById("num_cotizacion");
+const goback_button = document.getElementById("go-back");
+
+goback_button.addEventListener("click", () => {
+    localStorage.removeItem("cart");// Borra el carrito en LocalStorage
+    window.location.href = "index.html"; // Redirige a la página de cotización
+});
+
 // Descargar PDF
 const download_button = document.getElementById("download-pdf");
 
@@ -64,17 +71,19 @@ const download_button = document.getElementById("download-pdf");
 
 download_button.addEventListener("click", () => {
     download_button.classList.add('hidden');
+    goback_button.classList.add('hidden');
 
     const element = document.getElementById("cotizacion");
     const options = {
         margin: [120, 30, 30, 30], // Margen superior para el encabezado
         filename: `Cotizacion ${num_cotizacion.value}.pdf`,
-        html2canvas: { scale: 1 }, // Mantener escala baja para que el PDF no sea solo una imagen
+        html2canvas: { scale: 2 },
         jsPDF: {
             unit: "pt",
             format: "a4",
             orientation: "portrait",
         },
+        image: { type: "jpeg", quality: 1.0 }, // Mejorar calidad de imagen
         pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
     };
 
@@ -119,6 +128,7 @@ download_button.addEventListener("click", () => {
         .finally(() => {
             setTimeout(() => {
                 download_button.classList.remove('hidden');
+                goback_button.classList.remove('hidden');
             }, 1000);
         });
 });
