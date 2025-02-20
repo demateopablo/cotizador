@@ -583,7 +583,7 @@ function loadProducts(filter = "") {
                 ${version.version != '-' ? `<p><strong>Versión:</strong> ${version.version}</p>` : ""}
                 ${version.chasis != '-' ? `<p><strong>Chasis:</strong> ${version.chasis}</p>` : ""}
                 <p><strong>${version.lineas_separacion ? "Líneas - Separación" : "Capacidad"}:</strong> ${version.lineas_separacion || version.capacidad}</p>
-                <p class="price"><strong>USD</strong> $${version.precio.toFixed(0)}</p>
+                <p class="price"><strong>USD</strong> ${version.precio.toLocaleString('es-AR')}</p>
                 <button onclick="addToCart('${product.nombre}', '${version.codigo}', ${version.precio}, ${JSON.stringify(product.opcionales)}, '${descrip}')">Añadir al carrito</button>
                 `;
                 productGrid.appendChild(card);
