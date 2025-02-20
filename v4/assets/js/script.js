@@ -578,7 +578,7 @@ function loadProducts(filter = "") {
                 const card = document.createElement("div");
                 card.className = "product-card";
                 card.innerHTML = `
-                <h3 class="titulo-card" data-descripcion="${product.descripcion_formateada}">${product.nombre}</h3>
+                <h3 class="titulo-card" data-descripcion="${product.descripcion_formateada}" title="${product.nombre}">${product.nombre}</h3>
                 <p><strong>Código:</strong> <span class="codigo-card" title="Clic para copiar al portapapeles">${version.codigo}</span></p>
                 ${version.version != '-' ? `<p><strong>Versión:</strong> ${version.version}</p>` : ""}
                 ${version.chasis != '-' ? `<p><strong>Chasis:</strong> ${version.chasis}</p>` : ""}
@@ -607,7 +607,7 @@ function loadProducts(filter = "") {
                 card.className = "product-card";
                 card.innerHTML = `
                     <p><strong>Artículo opcional</strong></p>
-                    <h3>${opcional.nombre}</h3>
+                    <h3 title="${opcional.nombre}">${opcional.nombre}</h3>
                     <p><strong>ID:</strong> ${opcional.id}</p>
                     <p class="price"><strong>Precio:</strong> $${opcional.precio.toFixed(2)}</p>
                     <button onclick="addToCart('${opcional.nombre}', '${opcional.id}', ${opcional.precio})">Añadir al carrito</button>

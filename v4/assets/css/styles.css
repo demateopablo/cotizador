@@ -104,8 +104,13 @@ main {
 }
 
 .product-card h3 {
-    font-size: 20px;
+    font-size: 18px;
     margin: 10px 0;
+    white-space: wrap; /* Evita que el texto pase a la siguiente línea */
+    overflow: hidden; /* Oculta el texto que se desborda del contenedor */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos al texto que se corta */
+    width: 100%; /* Asegura que el contenedor no sea mayor que su contenedor padre */
+    display: block; /* Asegura que el elemento sea un bloque */
 }
 
 .product-card p {
