@@ -583,7 +583,7 @@ function loadProducts(filter = "") {
                 ${version.version != '-' ? `<p><strong>Versión:</strong> ${version.version}</p>` : ""}
                 ${version.chasis != '-' ? `<p><strong>Chasis:</strong> ${version.chasis}</p>` : ""}
                 <p><strong>${version.lineas_separacion ? "Líneas - Separación" : "Capacidad"}:</strong> ${version.lineas_separacion || version.capacidad}</p>
-                <p class="price"><strong>USD</strong> ${version.precio.toLocaleString('es-AR')}</p>
+                <p class="price"><strong>USD</strong> ${version.precio.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
                 <button onclick="addToCart('${product.nombre}', '${version.codigo}', ${version.precio}, ${JSON.stringify(product.opcionales)}, '${descrip}')">Añadir al carrito</button>
                 `;
                 productGrid.appendChild(card);
@@ -609,7 +609,7 @@ function loadProducts(filter = "") {
                     <p><strong>Artículo opcional</strong></p>
                     <h3 title="${opcional.nombre}">${opcional.nombre}</h3>
                     <p><strong>ID:</strong> ${opcional.id}</p>
-                    <p class="price"><strong>Precio:</strong> $${opcional.precio.toFixed(2)}</p>
+                    <p class="price"><strong>Precio:</strong> $${opcional.precio.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
                     <button onclick="addToCart('${opcional.nombre}', '${opcional.id}', ${opcional.precio})">Añadir al carrito</button>
                 `;
                 optionalsGrid.appendChild(card);
@@ -636,7 +636,7 @@ function loadOptionals() {
                     <p><strong>Artículo opcional</strong></p>
                     <h3>${opcional.nombre}</h3>
                     <p><strong>ID:</strong> ${opcional.id}</p>
-                    <p class="price"><strong>Precio:</strong> $${opcional.precio.toFixed(2)}</p>
+                    <p class="price"><strong>Precio:</strong> $${opcional.precio.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
                     <button onclick="addToCart('${opcional.nombre}', '${opcional.id}', ${opcional.precio})">Añadir al carrito</button>
                 `;
                 optionalsGrid.appendChild(card);
@@ -672,14 +672,14 @@ function updateCart() {
         const li = document.createElement("li");
         li.innerHTML = `
             <span>${item.name} (Código: ${item.code}) (x${item.quantity})</span>
-            <span>$${(item.price * item.quantity).toFixed(2)}</span>
+            <span>$${(item.price * item.quantity).toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
             <button onclick="removeFromCart('${item.name}', '${item.code}')">❌</button>
         `;
         cartItems.appendChild(li);
         total += item.price * item.quantity;
     });
 
-    totalElement.textContent = `$${total.toFixed(2)}`;
+    totalElement.textContent = `$${total.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 }
 
 // Eliminar producto del carrito
