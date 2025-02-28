@@ -5,6 +5,7 @@ body {
     padding: 0;
     background-color: #f5f5f5;
     color: #1e3a5f;
+    transition: all .3s ease;
 }
 
 header {
@@ -42,6 +43,10 @@ main {
 
 .search-bar {
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 }
 
 .search-bar input {
@@ -51,7 +56,7 @@ main {
     border: 2px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
-    transition: border-color 0.3s ease;
+    transition: all .3s ease;    
 }
 
 .search-bar input:focus {
@@ -64,13 +69,18 @@ main {
     border: none;
     cursor: pointer;
     color: #666;
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
+    transition: all .3s ease;
 }
 
 .clear-button:hover {
-    background-color: #00000050;
-    border-radius: 50%;
+    background-color: #ff000090;
+    border-radius: 5px;
+}
+
+#clear-search .trash-icon {
+    fill: #66666650;
 }
 
 /* Lista de productos */
@@ -127,16 +137,33 @@ main {
     margin: 10px 0;
 }
 
+.quantity-container {
+    display: flex; /* Coloca los elementos en fila */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre el input y el botón */
+    justify-content: center; /* Centra los elementos dentro del contenedor */
+    margin-top: 10px;
+}
+
+.product-card .input-cantidad {
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
 .product-card button {
     background-color: #2e8b57;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    white-space: nowrap; /* Evita que el texto del botón se corte */
     width: 100%;
-    margin-top: 8px;
 }
 
 .product-card button:hover {
@@ -175,12 +202,18 @@ main {
 }
 
 .cart li button {
-    background-color: #ff6b6b;
+    background-color: #ff6b6b50;
     color: white;
     border: none;
     padding: 2px 5px;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
+    height: 30px;
+    width: 30px;
+}
+
+.cart li button:hover{
+    background-color: #ff6b6b;
 }
 
 .cart-total {
@@ -204,13 +237,55 @@ main {
 }
 
 #clear-cart {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espacio entre el ícono y el texto */
     background-color: #ff6b6b;
     color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+}
+
+#clear-cart:hover {
+    background-color: #e85c5c; /* Color más oscuro al pasar el mouse */
+}
+
+/* Estilos del ícono dentro del botón */
+#clear-cart .trash-icon {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: white; /* Mantiene el color del ícono igual al texto */
+    stroke-width: 2;
 }
 
 #export-pdf {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espacio entre el ícono y el texto */
     background-color: #2e8b57;
     color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+}
+
+#export-pdf:hover {
+    background-color: #246f43; /* Un verde más oscuro al pasar el mouse */
+}
+
+/* Estilos del ícono dentro del botón */
+#export-pdf .pdf-icon {
+    width: 20px;
+    height: 20px;
+    fill: white; /* Asegura que el ícono sea blanco */
 }
 
 .cart-actions button:hover {
@@ -280,9 +355,6 @@ main {
         width: 100%;
         margin-top: 20px;
     }
-
-    /* Para pantallas pequeñas (mobile) */
-@media (max-width: 768px) {
     /* Mostrar el botón "Ver carrito" solo en mobile */
     .cart-toggle {
         display: block;
@@ -292,7 +364,7 @@ main {
         background-color: #2e8b57;
         color: white;
         padding: 10px 15px;
-        border-radius: 50px;
+        border-radius: 5px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         font-size: 14px;
         cursor: pointer;
@@ -321,5 +393,4 @@ main {
     .hidden {
         display: none;
     }
-}
 }

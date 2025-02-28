@@ -50,26 +50,7 @@ goback_button.addEventListener("click", () => {
 // Descargar PDF
 const download_button = document.getElementById("download-pdf");
 
-//Funcion para exportar a PDF directamente
 /* download_button.addEventListener("click", () => {
-    download_button.classList.add('hidden');
-    const element = document.getElementById("cotizacion");    
-    const options = {
-        margin: 30,
-        filename: `Cotizacion ${num_cotizacion.value}.pdf`,
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: "pt", format: "a4", orientation: "portrait" },
-    };
-    
-    html2pdf().from(element).set(options).save();
-    setTimeout(() => {
-        download_button.classList.remove('hidden');
-    }, 1000);
-});
- */
-
-download_button.addEventListener("click", () => {
     download_button.classList.add('hidden');
     goback_button.classList.add('hidden');
 
@@ -83,7 +64,7 @@ download_button.addEventListener("click", () => {
             format: "a4",
             orientation: "portrait",
         },
-        image: { type: "jpeg", quality: 1.0 }, // Mejorar calidad de imagen
+        image: { type: "jpg", quality: 1.0 }, // Mejorar calidad de imagen
         pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
     };
 
@@ -97,16 +78,17 @@ download_button.addEventListener("click", () => {
             pdf.setPage(i);
 
             // Encabezado
-            pdf.setFontSize(12);
+            pdf.setFontSize(10);
             pdf.setFont("helvetica", "bold");
-            pdf.text("Mario Tanzi S.A.", margin, 40);
-            pdf.text("San Lorenzo 1630, S2183XAB", margin, 55);
-            pdf.text("Arequito, Santa Fe, Argentina", margin, 70);
-            pdf.text("Tel: +549 03464 471109", margin, 85);
-            pdf.text("Email: ventas@tanzi.com.ar", margin, 100);
+            pdf.text("Gustavo Perez Maquinarias Agrícolas", margin, 40);
+            pdf.setFont("helvetica", "normal");
+            pdf.text("Av Independencia 993", margin, 53);
+            pdf.text("San Cayetano, Argentina", margin, 66);
+            pdf.text("Teléfono: +54 9 2983 508989", margin, 79);
+            pdf.text("Email: gustavoperez@gmail.com", margin, 92);
 
             // Logo
-            pdf.addImage("./assets/img/logo_tanzi.png", "PNG", pageWidth - 100 - margin, 30, 100, 40);
+            pdf.addImage("./assets/img/logo.png", "PNG", pageWidth - 95 - margin, 30, 100, 40);
 
             // Pie de página
             pdf.setFontSize(10);
@@ -131,4 +113,143 @@ download_button.addEventListener("click", () => {
                 goback_button.classList.remove('hidden');
             }, 1000);
         });
+});
+ */
+
+document.getElementById("download-pdf").addEventListener("click", () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: "portrait", unit: "pt", format: "a4" });
+
+    // Función para agregar el encabezado
+    const addHeader = (pageNumber, totalPages) => {
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12);
+        doc.text("Gustavo Perez Maquinarias Agrícolas", 30, 40);
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(10);
+        doc.text("Av Independencia 993", 30, 55);
+        doc.text("San Cayetano, Argentina", 30, 70);
+        doc.text("Teléfono: +54 9 2983 508989", 30, 85);
+        doc.text("Email: gustavoperez@gmail.com", 30, 100);
+        doc.addImage('./assets/img/logo.png', 'PNG', 400, 30, 100, 40);
+        doc.text(`Página ${pageNumber} de ${totalPages}`, doc.internal.pageSize.width - 80, doc.internal.pageSize.height - 20);
+    };
+
+    // Agregar encabezado en la primera página
+    addHeader(1, 1);
+
+    // Capturar los valores de los inputs de la tabla .info-table
+    const infoTableData1 = [
+        ["Solicitante", "Ejecutivo de Ventas", "Fecha de Cotización", "N° Cotización"],
+        [
+            `Nombre: ${document.querySelector("input[name='nombre']").value}\nCUIL/CUIT: ${document.querySelector("input[name='cuit']").value}\nEmail: ${document.querySelector("input[name='email']").value}\nTeléfono: ${document.querySelector("input[name='telefono']").value}`,
+            document.querySelector("input[name='vendedor']").value,
+            document.querySelector("input[name='fecha']").value,
+            document.querySelector("input[name='num_cotizacion']").value
+        ]];
+    const infoTableData2 = [
+        ["Condición de Pago", "Condición de Venta", "Válida Hasta", "Moneda"],
+        [
+            document.querySelector("input[name='condicion_pago']").value,
+            document.querySelector("input[name='condicion_venta']").value,
+            document.querySelector("input[name='fecha_validez']").value,
+            document.querySelector("input[name='moneda']").value
+        ]
+    ];
+
+    // Extraer tabla de la cotización y convertirla a PDF
+    doc.autoTable({
+        head: [infoTableData1[0]],
+        body: [infoTableData1[1]],
+        startY: 120, // Ubicación en la página
+        theme: "grid", // Estilo de la tabla
+        styles: {
+            font: "helvetica",
+            fontSize: 10,
+            cellPadding: 5,
+        },
+        headStyles: { textColor: [0, 0, 0], fillColor: [233, 245, 236], fontSize: 10 },
+        tableLineColor: [46, 139, 87], // Color del borde (verde)
+        tableLineWidth: 1, // Grosor del borde (1 píxel)
+        didDrawPage: (data) => {
+            // Agregar encabezado en cada página
+            addHeader(data.pageNumber, doc.internal.getNumberOfPages());
+        },
+        margin: { top: 120 } // Margen superior para no pisar el encabezado
+    });
+
+    doc.autoTable({
+        head: [infoTableData2[0]],
+        body: [infoTableData2[1]],
+        startY: 200, // Ubicación en la página
+        theme: "grid", // Estilo de la tabla
+        styles: {
+            font: "helvetica",
+            fontSize: 10,
+            cellPadding: 5,
+        },
+        headStyles: { textColor: [0, 0, 0], fillColor: [233, 245, 236], fontSize: 10 },
+        tableLineColor: [46, 139, 87], // Color del borde (verde)
+        tableLineWidth: 1, // Grosor del borde (1 píxel)
+        didDrawPage: (data) => {
+            // Agregar encabezado en cada página
+            addHeader(data.pageNumber, doc.internal.getNumberOfPages());
+        },
+        margin: { top: 200 } // Margen superior para no pisar el encabezado
+    });
+
+    const finalY = doc.autoTable.previous.finalY;
+
+    // Extraer tabla de productos y convertirla a PDF
+    doc.autoTable({
+        html: "#productos-table", // ID de la tabla HTML
+        startY: finalY + 10, // Ubicación en la página
+        theme: "grid", // Estilo de la tabla
+        styles: {
+            font: "helvetica",
+            fontSize: 10,
+            cellPadding: 5,
+        },
+        headStyles: { textColor: [0, 0, 0], fillColor: [233, 245, 236], fontSize: 10 },
+        tableLineColor: [46, 139, 87], // Color del borde (verde)
+        tableLineWidth: 1, // Grosor del borde (1 píxel)
+        didDrawPage: (data) => {
+            // Agregar encabezado en cada página
+            addHeader(data.pageNumber, doc.internal.getNumberOfPages());
+        },
+        margin: { top: 120 }, // Margen superior para no pisar el encabezado
+        rowPageBreak: 'auto' // Asegura que las filas no se rompan entre páginas
+    });
+
+    const finalY2 = doc.autoTable.previous.finalY;
+
+    // Agregar el div #totales
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.text("Totales (USD)", 30, finalY2 + 20);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.text(`Subtotal: $${document.getElementById("subtotal").textContent}`, 30, finalY2 + 40);
+    doc.text(`IVA (10.5%): $${document.getElementById("iva").textContent}`, 30, finalY2 + 60);
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.text(`Total: $${document.getElementById("total").textContent}`, 30, finalY2 + 80);
+    doc.setFontSize(12);
+    doc.text("Detalles adicionales:", 30, finalY2 + 100);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    // Ajustar el ancho del textarea para que el texto se ajuste dentro del PDF
+    const detalles = document.getElementById("detalles").value;
+    const splitDetalles = doc.splitTextToSize(detalles, doc.internal.pageSize.width - 60);
+    doc.text(splitDetalles, 30, finalY2 + 120);
+
+    // Agregar pie de página con número de página
+    const totalPages = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= totalPages; i++) {
+        doc.setPage(i);
+        addHeader(i, totalPages);
+    }
+
+    // Guardar el PDF
+    doc.save(`Cotizacion ${num_cotizacion.value}.pdf`);
 });

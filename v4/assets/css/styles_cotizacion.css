@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+    transition: all .3s ease;
+}
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
@@ -8,7 +12,7 @@ body {
 }
 
 #cotizacion {
-    max-width: 800px;
+    max-width: 900px;
     margin: 20px auto;
     padding: 10px;
     background-color: #ffffff;
@@ -53,8 +57,16 @@ h3 {
     padding-bottom: 5px;
 }
 
+#detalles-cotizacion{
+    display: flex;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
 textarea {
-    width: 100%;
+    display: flex;
+    justify-self: center;
+    padding: 10px;
+    width: 90%;
     min-height: 50px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -125,6 +137,9 @@ select {
 }
 
 button {
+    display: flex;
+    align-items: center; /* Centra verticalmente el ícono y el texto */
+    justify-content: center; /* Centra el contenido horizontalmente */
     background-color: #2e8b57;
     color: white;
     padding: 10px 20px;
@@ -132,7 +147,7 @@ button {
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
-    margin-top: 20px;
+    gap: 8px; /* Espacio entre el ícono y el texto */
 }
 
 button:hover {
@@ -145,11 +160,22 @@ button:hover {
     right: 20px;
     top: 20px;
     margin: 0;
-    &hover {
-        background-color: #8b1c1c;
-    }
+}
+
+
+#go-back:hover {
+    background-color: #8b1c1c;
 }
 
 .hidden {
     display: none;
+}
+
+#download-pdf #download-icon, #go-back #go-back-icon {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: white; /* Mantiene el color del ícono igual al texto */
+    stroke-width: 2;
+    margin-right: 5px;
 }

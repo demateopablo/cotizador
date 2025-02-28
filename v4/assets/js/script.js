@@ -539,7 +539,10 @@ const closeModal = document.querySelector(".close");
 const clearButton = document.querySelector('#clear-search');
 
 exportPdfButton.addEventListener("click", () => {
-
+    if (cart.length === 0) {
+        alert("El carrito está vacío. Agregue productos para generar la cotización.");
+        return;
+    }
     localStorage.clear();
     localStorage.setItem("cart", JSON.stringify(cart)); // Guarda el carrito en LocalStorage
     // Agrega la clase fade-out a todo el body
@@ -561,12 +564,54 @@ let cart = [];
 let availableOptionals = [];
 
 // Cargar productos y opcionales en la página
+
+// Función para crear una tarjeta de producto
+function createProductCard(product, version) {
+    const descrip = product.descripcion;
+    const card = document.createElement("div");
+    card.className = "product-card";
+
+    card.innerHTML = `
+        <h3 class="titulo-card" data-descripcion="${product.descripcion_formateada}" title="${product.nombre}">${product.nombre}</h3>
+        <p><strong>Código:</strong> <span class="codigo-card" title="Clic para copiar al portapapeles">${version.codigo}</span></p>
+        ${version.version !== '-' ? `<p><strong>Versión:</strong> ${version.version}</p>` : ""}
+        ${version.chasis !== '-' ? `<p><strong>Chasis:</strong> ${version.chasis}</p>` : ""}
+        <p><strong>${version.lineas_separacion ? "Líneas - Separación" : "Capacidad"}:</strong> ${version.lineas_separacion || version.capacidad}</p>
+        <p class="price"><strong>USD</strong> ${version.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+        <div class="quantity-container">
+        <input class='input-cantidad' title='Cantidad' id="id_${version.codigo}" type="number" min="1" value="1">
+        <button onclick="addToCart('${product.nombre}', '${version.codigo}', ${version.precio},document.getElementById('id_${version.codigo}').value, ${JSON.stringify(product.opcionales)}, '${descrip}')">Añadir al carrito</button>
+        </div>
+    `;
+
+    return card;
+}
+
+// Función para crear una tarjeta de opcional
+function createOptionalCard(opcional) {
+    const card = document.createElement("div");
+    card.className = "product-card";
+
+    card.innerHTML = `
+        <p><strong>Artículo opcional</strong></p>
+        <h3 title="${opcional.nombre}">${opcional.nombre}</h3>
+        <p><strong>ID:</strong> ${opcional.id}</p>
+        <p class="price"><strong>Precio:</strong> $${opcional.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+        <div class="quantity-container">
+        <input class='input-cantidad' title='Cantidad'  id="id_${opcional.id}" type="number" min="1" value="1">
+        <button onclick="addToCart('${opcional.nombre}', '${opcional.id}', ${opcional.precio}, document.getElementById('id_${opcional.id}').value)">Añadir al carrito</button>
+        </div>
+        `;
+
+    return card;
+}
+
+// Función para cargar productos
 function loadProducts(filter = "") {
     productGrid.innerHTML = "";
 
     // Cargar sembradoras
     data.sembradoras.forEach(product => {
-        let descrip = product.descripcion;
         product.versiones.forEach(version => {
             if (
                 product.nombre.toLowerCase().includes(filter.toLowerCase()) ||
@@ -575,84 +620,55 @@ function loadProducts(filter = "") {
                 version.lineas_separacion?.toLowerCase().includes(filter.toLowerCase()) ||
                 version.capacidad?.toLowerCase().includes(filter.toLowerCase())
             ) {
-                const card = document.createElement("div");
-                card.className = "product-card";
-                card.innerHTML = `
-                <h3 class="titulo-card" data-descripcion="${product.descripcion_formateada}" title="${product.nombre}">${product.nombre}</h3>
-                <p><strong>Código:</strong> <span class="codigo-card" title="Clic para copiar al portapapeles">${version.codigo}</span></p>
-                ${version.version != '-' ? `<p><strong>Versión:</strong> ${version.version}</p>` : ""}
-                ${version.chasis != '-' ? `<p><strong>Chasis:</strong> ${version.chasis}</p>` : ""}
-                <p><strong>${version.lineas_separacion ? "Líneas - Separación" : "Capacidad"}:</strong> ${version.lineas_separacion || version.capacidad}</p>
-                <p class="price"><strong>USD</strong> ${version.precio.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
-                <button onclick="addToCart('${product.nombre}', '${version.codigo}', ${version.precio}, ${JSON.stringify(product.opcionales)}, '${descrip}')">Añadir al carrito</button>
-                `;
-                productGrid.appendChild(card);
+                productGrid.appendChild(createProductCard(product, version));
             }
         });
     });
 
-    // Agregar evento a los títulos después de cargar las cards
+    // Agregar eventos a los títulos después de cargar las cards
     agregarEventosCards();
 
-    if (filter) {
-        const optionalsGrid = document.getElementById("optionals-grid");
-        optionalsGrid.innerHTML = "";
-
-        data.opcionales.forEach(opcional => {
-            if (
-                opcional.nombre.toLowerCase().includes(filter.toLowerCase()) ||
-                opcional.id.toString().includes(filter)
-            ) {
-                const card = document.createElement("div");
-                card.className = "product-card";
-                card.innerHTML = `
-                    <p><strong>Artículo opcional</strong></p>
-                    <h3 title="${opcional.nombre}">${opcional.nombre}</h3>
-                    <p><strong>ID:</strong> ${opcional.id}</p>
-                    <p class="price"><strong>Precio:</strong> $${opcional.precio.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
-                    <button onclick="addToCart('${opcional.nombre}', '${opcional.id}', ${opcional.precio})">Añadir al carrito</button>
-                `;
-                optionalsGrid.appendChild(card);
-            }
-        });
-    } else {
-        // Si no hay búsqueda, cargar los opcionales disponibles para los productos en el carrito
-        loadOptionals();
-    }
+    // Cargar opcionales según el filtro
+    loadOptionals(filter);
 }
 
-// Cargar opcionales disponibles
-function loadOptionals() {
+// Función para cargar opcionales (filtrados o disponibles)
+function loadOptionals(filter = "") {
     const optionalsGrid = document.getElementById("optionals-grid");
     optionalsGrid.innerHTML = "";
 
-    if (availableOptionals.length > 0) {
-        availableOptionals.forEach(opcionalId => {
-            const opcional = data.opcionales.find(opc => opc.id === opcionalId);
-            if (opcional) {
-                const card = document.createElement("div");
-                card.className = "product-card";
-                card.innerHTML = `
-                    <p><strong>Artículo opcional</strong></p>
-                    <h3>${opcional.nombre}</h3>
-                    <p><strong>ID:</strong> ${opcional.id}</p>
-                    <p class="price"><strong>Precio:</strong> $${opcional.precio.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
-                    <button onclick="addToCart('${opcional.nombre}', '${opcional.id}', ${opcional.precio})">Añadir al carrito</button>
-                `;
-                optionalsGrid.appendChild(card);
-            }
-        });
+    let optionalsToLoad = [];
+
+    if (filter) {
+        // Filtrar opcionales por búsqueda
+        optionalsToLoad = data.opcionales.filter(opcional =>
+            opcional.nombre.toLowerCase().includes(filter.toLowerCase()) ||
+            opcional.id.toString().includes(filter)
+        );
+    } else if (availableOptionals.length > 0) {
+        // Cargar opcionales disponibles en el carrito
+        optionalsToLoad = data.opcionales.filter(opc => availableOptionals.includes(opc.id));
     }
+
+    // Agregar tarjetas al DOM
+    optionalsToLoad.forEach(opcional => {
+        optionalsGrid.appendChild(createOptionalCard(opcional));
+    });
 }
 
+
 // Añadir producto al carrito
-function addToCart(productName, productCode, price, opcionales = [], productDescription) {
+function addToCart(productName, productCode, price, quantity, opcionales = [], productDescription) {
+    if (quantity < 1) {
+        alert(`La cantidad de ${productName} código ${productCode} debe ser mayor a cero, pero se ingresó ${quantity}.`);
+        return;
+    }
     const existingItem = cart.find(item => item.name === productName && item.code === productCode);
 
     if (existingItem) {
-        existingItem.quantity++;
+        existingItem.quantity + quantity;
     } else {
-        cart.push({ name: productName, code: productCode, price: price, quantity: 1, description: productDescription });
+        cart.push({ name: productName, code: productCode, price: price, quantity: quantity, description: productDescription });
         // Agregar opcionales a la lista de disponibles si es una sembradora
         if (opcionales.length > 0) {
             availableOptionals = opcionales;
@@ -672,14 +688,14 @@ function updateCart() {
         const li = document.createElement("li");
         li.innerHTML = `
             <span>${item.name} (Código: ${item.code}) (x${item.quantity})</span>
-            <span>$${(item.price * item.quantity).toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
-            <button onclick="removeFromCart('${item.name}', '${item.code}')">❌</button>
+            <span>$${(item.price * item.quantity).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+            <button title="Remover producto del Carrito de Cotización" onclick="removeFromCart('${item.name}', '${item.code}')">❌</button>
         `;
         cartItems.appendChild(li);
         total += item.price * item.quantity;
     });
 
-    totalElement.textContent = `$${total.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    totalElement.textContent = `$${total.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
 // Eliminar producto del carrito
@@ -702,7 +718,7 @@ searchInput.addEventListener("input", () => {
 });
 
 // Limpiar el input al hacer clic en el botón
-clearButton.addEventListener('click', function() {
+clearButton.addEventListener('click', function () {
     searchInput.value = '';
     searchInput.dispatchEvent(new Event('input')); // Simula un evento "input" para actualizar el filtrado
 });
@@ -722,18 +738,18 @@ function agregarEventosCards() {
         codigos.forEach((codigo) => {
             codigo.addEventListener("click", function () {
                 navigator.clipboard.writeText(codigo.innerHTML)
-                .then(() => {
-                    const textoOriginal = codigo.innerText;
-                    codigo.innerText = '¡Copiado!';
-                    setTimeout(() => {
-                        codigo.innerText = textoOriginal; // Restaura el texto después de 2 segundos
-                    }, 1000);
-                    searchInput.value=textoOriginal;
-                    searchInput.dispatchEvent(new Event('input'));
-                })
-                .catch(err => {
-                    console.error('Error al copiar el texto: ', err);
-                });
+                    .then(() => {
+                        const textoOriginal = codigo.innerText;
+                        codigo.innerText = '¡Copiado!';
+                        setTimeout(() => {
+                            codigo.innerText = textoOriginal; // Restaura el texto después de 2 segundos
+                        }, 1000);
+                        searchInput.value = textoOriginal;
+                        searchInput.dispatchEvent(new Event('input'));
+                    })
+                    .catch(err => {
+                        console.error('Error al copiar el texto: ', err);
+                    });
             });
         });
     }
@@ -771,3 +787,5 @@ const cartContainer = document.getElementById("cart");
 toggleCartButton.addEventListener("click", function () {
     cartContainer.classList.toggle("hidden");
 });
+
+
