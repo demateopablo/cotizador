@@ -669,7 +669,7 @@ function addToCart(productName, productCode, price, quantity, opcionales = [], p
     const existingItem = cart.find(item => item.name === productName && item.code === productCode);
 
     if (existingItem) {
-        existingItem.quantity + quantity;
+        existingItem.quantity = Number(existingItem.quantity) + Number(quantity);
     } else {
         cart.push({ name: productName, code: productCode, price: price, quantity: quantity, description: productDescription });
         // Agregar opcionales a la lista de disponibles si es una sembradora
@@ -679,7 +679,7 @@ function addToCart(productName, productCode, price, quantity, opcionales = [], p
         }
     }
     updateCart();
-    showToast(`✅ ${productName} añadido al carrito`);
+    showToast(`✅ ${productCode} añadido al carrito`);
 }
 
 // Actualizar el carrito
@@ -705,7 +705,7 @@ function updateCart() {
 function removeFromCart(productName, productCode) {
     cart = cart.filter(item => !(item.name === productName && item.code === productCode));
     updateCart();
-    showToast(`❌ ${productName} removido del carrito`, true);
+    showToast(`❌ ${productCode} removido del carrito`, true);
 }
 
 // Vaciar el carrito
