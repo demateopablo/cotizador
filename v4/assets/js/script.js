@@ -376,8 +376,8 @@ const data = {
             "descripcion_formateada": `
             <p>Dosificadores V set 2 con mini tolva original, tubos de bajada original con sensores wave visión, Motores eléctricos V drive, Monitor Gen 3 20/20 con accesorios, kit alternador desde los 32 surcos en adelante.</p>`,
             "versiones": [
-                { "codigo": 5680038, "version": "KIT Grano Grueso Precision Planting Cant (6 unidades)", "precio": 50331, "opc": false },
                 { "codigo": 5680039, "version": "KIT Grano Grueso Precision Planting Cant (7 unidades)", "precio": 54602, "opc": false },
+                { "codigo": 5680038, "version": "KIT Grano Grueso Precision Planting Cant (6 unidades)", "precio": 50331, "opc": false },
                 { "codigo": 5620062, "version": "KIT Grano Grueso Precision Planting Cant (8 unidades)", "precio": 58335, "opc": false },
                 { "codigo": 5620063, "version": "KIT Grano Grueso Precision Planting Cant (9 unidades)", "precio": 62836, "opc": false },
                 { "codigo": 5620064, "version": "KIT Grano Grueso Precision Planting Cant (10 unidades)", "precio": 66738, "opc": false },
@@ -543,6 +543,7 @@ exportPdfButton.addEventListener("click", () => {
         alert("El carrito está vacío. Agregue productos para generar la cotización.");
         return;
     }
+    showToast(`✅ Redirigiendo a la página de cotización...`);
     localStorage.clear();
     localStorage.setItem("cart", JSON.stringify(cart)); // Guarda el carrito en LocalStorage
     // Agrega la clase fade-out a todo el body
@@ -572,12 +573,13 @@ function createProductCard(product, version) {
     card.className = "product-card";
 
     card.innerHTML = `
-        <h3 class="titulo-card" data-descripcion="${product.descripcion_formateada}" title="${product.nombre}">${product.nombre}</h3>
+        <h2 class="titulo-card" data-descripcion="${product.descripcion_formateada}" title="${product.nombre}">${product.nombre}</h2>
         <p><strong>Código:</strong> <span class="codigo-card" title="Clic para copiar al portapapeles">${version.codigo}</span></p>
-        ${version.version !== '-' ? `<p><strong>Versión:</strong> ${version.version}</p>` : ""}
-        ${version.chasis !== '-' ? `<p><strong>Chasis:</strong> ${version.chasis}</p>` : ""}
-        <p><strong>${version.lineas_separacion ? "Líneas - Separación" : "Capacidad"}:</strong> ${version.lineas_separacion || version.capacidad}</p>
-        <p class="price"><strong>USD</strong> ${version.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+        ${version.version !== '-' && version.version !== undefined ? `<p><strong>Versión:</strong> ${version.version}</p>` : ""}
+        ${version.chasis !== '-' && version.chasis !== undefined ? `<p><strong>Chasis:</strong> ${version.chasis}</p>` : ""}
+        ${version.lineas_separacion !== undefined ? `<p><strong>Lineas de Separación:</strong> ${version.lineas_separacion}</p>` : ""}
+        ${version.capacidad !== undefined ? `<p><strong>Capacidad:</strong> ${version.capacidad}</p>` : ""}
+        <p class="price"><strong></strong>${version.precio != 0 ? "USD " + version.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }):"Consultar"}</p>
         <div class="quantity-container">
         <input class='input-cantidad' title='Cantidad' id="id_${version.codigo}" type="number" min="1" value="1">
         <button onclick="addToCart('${product.nombre}', '${version.codigo}', ${version.precio},document.getElementById('id_${version.codigo}').value, ${JSON.stringify(product.opcionales)}, '${descrip}')">Añadir al carrito</button>
@@ -594,7 +596,7 @@ function createOptionalCard(opcional) {
 
     card.innerHTML = `
         <p><strong>Artículo opcional</strong></p>
-        <h3 title="${opcional.nombre}">${opcional.nombre}</h3>
+        <h2 title="${opcional.nombre}">${opcional.nombre}</h2>
         <p><strong>ID:</strong> ${opcional.id}</p>
         <p class="price"><strong>Precio:</strong> $${opcional.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
         <div class="quantity-container">
@@ -616,6 +618,7 @@ function loadProducts(filter = "") {
             if (
                 product.nombre.toLowerCase().includes(filter.toLowerCase()) ||
                 version.codigo.toString().includes(filter) ||
+                version.chasis?.toString().includes(filter) ||
                 version.version.toString().includes(filter) ||
                 version.lineas_separacion?.toLowerCase().includes(filter.toLowerCase()) ||
                 version.capacidad?.toLowerCase().includes(filter.toLowerCase())
@@ -675,8 +678,8 @@ function addToCart(productName, productCode, price, quantity, opcionales = [], p
             loadOptionals();
         }
     }
-
     updateCart();
+    showToast(`✅ ${productName} añadido al carrito`);
 }
 
 // Actualizar el carrito
@@ -702,6 +705,7 @@ function updateCart() {
 function removeFromCart(productName, productCode) {
     cart = cart.filter(item => !(item.name === productName && item.code === productCode));
     updateCart();
+    showToast(`❌ ${productName} removido del carrito`, true);
 }
 
 // Vaciar el carrito
@@ -709,6 +713,7 @@ clearCartButton.addEventListener("click", () => {
     cart = [];
     availableOptionals = [];
     updateCart();
+    showToast(`🗑️ El carrito ha sido vaciado`, true);
     loadOptionals();
 });
 
@@ -781,11 +786,36 @@ loadProducts();
 
 // Seleccionar el botón y el contenedor del carrito
 const toggleCartButton = document.getElementById("toggle-cart");
-const cartContainer = document.getElementById("cart");
+const cartContainer = document.querySelector(".cart");
 
 // Escuchar el clic en el botón y alternar la visibilidad del carrito
 toggleCartButton.addEventListener("click", function () {
     cartContainer.classList.toggle("hidden");
 });
 
+// Función para mostrar un toast
+function showToast(message, isError = false) {
+    const toastContainer = document.getElementById("toast-container");
 
+    // Crear el elemento toast
+    const toast = document.createElement("div");
+    toast.className = `toast ${isError ? "error" : ""}`;
+    toast.textContent = message;
+
+    // Botón para cerrar el toast
+    const closeButton = document.createElement("button");
+    closeButton.className = "toast-close";
+    closeButton.textContent = "✖️";
+    closeButton.onclick = () => toast.remove();
+
+    // Agregar el botón de cerrar al toast
+    toast.appendChild(closeButton);
+
+    // Agregar el toast al contenedor
+    toastContainer.appendChild(toast);
+
+    // Eliminar el toast después de 3 segundos
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
