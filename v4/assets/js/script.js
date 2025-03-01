@@ -690,7 +690,7 @@ function updateCart() {
     cart.forEach(item => {
         const li = document.createElement("li");
         li.innerHTML = `
-            <span>${item.name} (Código: ${item.code}) (x${item.quantity})</span>
+            <span>${item.name} (Código: ${item.code}) (x${item.quantity}) - </span>
             <span>$${(item.price * item.quantity).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             <button title="Remover producto del Carrito de Cotización" onclick="removeFromCart('${item.name}', '${item.code}')">❌</button>
         `;
