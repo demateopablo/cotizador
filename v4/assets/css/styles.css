@@ -473,10 +473,6 @@ main {
         z-index: 2000;
     }
 
-    .cart-toggle:hover {
-        background-color: #246f43;
-    }
-
     #cart-icon{
         height: 30px;
         width: 30px;
