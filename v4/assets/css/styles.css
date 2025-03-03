@@ -11,38 +11,30 @@ body {
 header {
     background-color: #2e8b57;
     color: white;
-    padding: 20px;
     text-align: center;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
+    border-radius: 0 0 8px 8px;
+    height: 110px;
 }
 
 .logo img {
-    width: 120px;
+    width: 80px;
     position: absolute;
-    left: 10px;
-    top: 35px
+    left: 20px;
+    top: 30px;
 }
 
 h1 {
     font-family: 'Poppins', sans-serif;
-    margin: 0;
-}
-
-/* Contenedor principal (main) */
-main {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-    padding-top: 80px;
-    /* Espacio para la barra de búsqueda fija */
+    font-size: 1.5em;
 }
 
 .search-bar {
-    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-top: -10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,6 +73,16 @@ main {
 
 #clear-search .trash-icon {
     fill: #66666650;
+}
+
+/* Contenedor principal (main) */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    padding-top: 80px;
+    /* Espacio para la barra de búsqueda fija */
 }
 
 /* Lista de productos */
@@ -200,7 +202,7 @@ main {
 }
 
 .cart .cart-content {
-    max-height: 400px;
+    max-height: 350px;
     overflow-y: auto;
     padding-right: 20px;
 }
@@ -429,10 +431,6 @@ main {
         justify-content: center;
     }
 
-    header h1 {
-        font-size: 1.5em;
-    }
-
     .logo img {
         width: 15%;
     }
@@ -465,19 +463,23 @@ main {
         position: fixed;
         bottom: 20px;
         right: 20px;
+        height: 60px;
+        width: 60px;
         background-color: #2e8b57;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 5px;
+        border: none;
+        border-radius: 50%;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        font-size: 14px;
         cursor: pointer;
         z-index: 2000;
-        transition: background-color 0.3s ease;
     }
 
     .cart-toggle:hover {
         background-color: #246f43;
+    }
+
+    #cart-icon{
+        height: 30px;
+        width: 30px;
     }
 
     /* Ocultar el carrito en mobile por defecto */
