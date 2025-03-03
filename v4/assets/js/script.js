@@ -765,7 +765,7 @@ function mostrarModal(descripcion) {
     const modal = document.getElementById("modal");
     const modalText = document.getElementById("modal-text");
     modalText.innerHTML = descripcion;
-    modal.style.display = "block";
+    modal.style.display = "flex";
 }
 
 // Cerrar el modal al hacer clic en la "x"
@@ -818,4 +818,55 @@ function showToast(message, isError = false) {
     setTimeout(() => {
         toast.remove();
     }, 3000);
+}
+
+let btnAyuda = document.getElementById("btn-ayuda");
+
+btnAyuda.addEventListener("click", mostrarAyuda);
+
+function mostrarAyuda(){
+
+    let ayuda = 
+    `
+    <ul>
+    <li>
+        <h3>🔍 Clic en un Código</h3>
+        <p>Si hacés clic en el código de un producto, se filtrarán automáticamente los productos relacionados a ese artículo.</p>
+        <p>Además, si agregás una máquina al carrito, se mostrarán los opcionales específicos para ese modelo.</p>
+    </li>
+
+    <li>
+        <h3>ℹ️ Clic en un Título</h3>
+        <p>Al hacer clic en el título de una máquina, se abrirá un modal con información detallada sobre sus características y especificaciones.</p>
+    </li>
+
+    <li>
+        <h3>🛒 Opcionales Automáticos</h3>
+        <p>Cuando agregás una máquina al carrito, los opcionales disponibles para ese modelo se muestran automáticamente en la sección de opcionales, para que puedas agregarlos fácilmente.</p>
+    </li>
+
+    <li>
+        <h3>🎯 Búsqueda Avanzada</h3>
+        <p>Podés buscar productos por cualquier criterio: nombre, versión, código, cantidad de líneas de siembra, metros de chasis y más.</p>
+        <p>Simplemente escribí en la barra de búsqueda para filtrar los resultados en tiempo real.</p>
+    </li>
+
+    <li>
+        <h3>📄 Exportar Cotización</h3>
+        <p>Hacé clic en el botón "Exportar a PDF" para generar un documento con los productos seleccionados y sus precios, listo para compartir.</p>
+    </li>
+
+    <li>
+        <h3>🗑️ Vaciar Carrito</h3>
+        <p>Si querés reiniciar la selección, usá el botón "Vaciar Carrito" para eliminar todos los artículos agregados en un solo clic.</p>
+    </li>
+
+    <li>
+        <h3>📌 Acceso Rápido a Opcionales</h3>
+        <p>Si querés agregar opcionales manualmente, filtrá por código en la barra de búsqueda para encontrarlos fácilmente sin necesidad de recorrer toda la lista.</p>
+    </li>
+</ul>
+    `
+    mostrarModal(ayuda)
+
 }

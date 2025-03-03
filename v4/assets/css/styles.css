@@ -32,6 +32,28 @@ h1 {
     font-size: 1.5em;
 }
 
+.ayuda {
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    height: 40px;
+    width: 40px;
+}
+
+#btn-ayuda{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    height: 50px;
+    width: 50px;
+    transition: all .3s ease;
+    border-radius: 50%;
+}
+
+#btn-ayuda:hover{
+    background-color: #00000010;
+}
 .search-bar {
     margin-bottom: 10px;
     margin-top: -10px;
@@ -317,27 +339,32 @@ main {
     opacity: 0.9;
 }
 
-/* Estilos del modal */
+/* Fondo del modal */
 .modal {
     display: none;
-    /* Oculto por defecto */
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0; /* top: 0; left: 0; bottom: 0; right: 0 */
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 1000;
+    backdrop-filter: blur(5px);
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    padding: 20px; /* Evita que toque los bordes */
 }
 
+/* Contenedor del modal */
 .modal-content {
     background-color: #fff;
     padding: 20px;
-    margin: 15% auto;
-    width: 50%;
+    width: 60%;
+    max-width: 800px;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    /* Altura dinámica */
+    max-height: 80vh; /* No puede ser más alto que el 80% de la pantalla */
+    overflow-y: auto; /* Scroll interno si es necesario */
 }
 
 .close {
