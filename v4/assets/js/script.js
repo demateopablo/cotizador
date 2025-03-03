@@ -579,7 +579,7 @@ function createProductCard(product, version) {
         ${version.chasis !== '-' && version.chasis !== undefined ? `<p><strong>Chasis:</strong> ${version.chasis}</p>` : ""}
         ${version.lineas_separacion !== undefined ? `<p><strong>Lineas de Separación:</strong> ${version.lineas_separacion}</p>` : ""}
         ${version.capacidad !== undefined ? `<p><strong>Capacidad:</strong> ${version.capacidad}</p>` : ""}
-        <p class="price"><strong></strong>${version.precio != 0 ? "USD " + version.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }):"Consultar"}</p>
+        <p class="price"><strong></strong>${version.precio != 0 ? "USD " + version.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "Consultar"}</p>
         <div class="quantity-container">
         <input class='input-cantidad' title='Cantidad' id="id_${version.codigo}" type="number" min="1" value="1">
         <button onclick="addToCart('${product.nombre}', '${version.codigo}', ${version.precio},document.getElementById('id_${version.codigo}').value, ${JSON.stringify(product.opcionales)}, '${descrip}')">Añadir al carrito</button>
@@ -824,14 +824,16 @@ let btnAyuda = document.getElementById("btn-ayuda");
 
 btnAyuda.addEventListener("click", mostrarAyuda);
 
-function mostrarAyuda(){
+function mostrarAyuda() {
 
-    let ayuda = 
-    `
+    let ayuda =
+        `
     <ul>
     <h3>🔍 Clic en un Código</h3>
     <li>
         <p>Si hacés clic en el código de un producto, se filtrarán automáticamente los productos relacionados a ese artículo.</p>
+    </li>
+    <li>
         <p>Además, si agregás una máquina al carrito, se mostrarán los opcionales específicos para ese modelo.</p>
     </li>
 
@@ -848,6 +850,8 @@ function mostrarAyuda(){
     <h3>🎯 Búsqueda Avanzada</h3>
     <li>
         <p>Podés buscar productos por cualquier criterio: nombre, versión, código, metros de chasis y más.</p>
+    </li>
+    <li>
         <p>Simplemente escribí en la barra de búsqueda para filtrar los resultados en tiempo real.</p>
     </li>
 
