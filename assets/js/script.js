@@ -500,7 +500,6 @@ const data = {
         { "id": 5450002, "nombre": "Sin fin de carga y descarga de 250mm", "precio": 8119 },
         { "id": 5450007, "nombre": "Kit de fertilización electrohidráulica Precisión Planting", "precio": 9201 },
         { "id": 5450008, "nombre": "Kit de fertilización eléctrica motor vED750 (por unidad)", "precio": 7036 },
-        { "id": 5450020, "nombre": "Radiador parar refrigeración de circuito hidráulico con soporte y conexiones", "precio": 3097 },
         { "id": 5450003, "nombre": "Noria de carga a cinta", "precio": 17590 },
         { "id": 5450002, "nombre": "Sin fin de carga y descarga de 250mm", "precio": 8119 },
         { "id": 5450007, "nombre": "Kit de fertilización electrohidráulica Precisión Planting", "precio": 9201 },
