@@ -611,17 +611,17 @@ function createOptionalCard(opcional) {
 // Función para cargar productos
 function loadProducts(filter = "") {
     productGrid.innerHTML = "";
-
+    let filter_lowerCase=filter.toLowerCase();
     // Cargar sembradoras
     data.sembradoras.forEach(product => {
         product.versiones.forEach(version => {
             if (
-                product.nombre.toLowerCase().includes(filter.toLowerCase()) ||
-                version.codigo.toString().includes(filter) ||
-                version.chasis?.toString().includes(filter) ||
-                version.version.toString().includes(filter) ||
-                version.lineas_separacion?.toLowerCase().includes(filter.toLowerCase()) ||
-                version.capacidad?.toLowerCase().includes(filter.toLowerCase())
+                product.nombre.toLowerCase().includes(filter_lowerCase) ||
+                version.codigo.toString().toLowerCase().includes(filter_lowerCase) ||
+                version.chasis?.toString().toLowerCase().includes(filter_lowerCase) ||
+                version.version.toString().toLowerCase().includes(filter_lowerCase) ||
+                version.lineas_separacion?.toLowerCase().includes(filter_lowerCase) ||
+                version.capacidad?.toLowerCase().includes(filter_lowerCase)
             ) {
                 productGrid.appendChild(createProductCard(product, version));
             }
