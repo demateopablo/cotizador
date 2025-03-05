@@ -1,0 +1,125 @@
+/* Variables de colores */
+:root {
+    --color-fondo-principal: #e9dcdc;
+    /* Gris medio, aporta solidez */
+    --color-fondo-secundario: #ece3e3;
+    /* Fondo más claro, evita contrastes bruscos */
+    --color-fondo-principal2: #c8c8c8;
+    /* Intermedio entre ambos fondos */
+    --color-boton: #d22a2a;
+    /* Rojo fuerte pero elegante */
+    --color-titulos: #8B0000;
+    /* Rojo más oscuro, aporta sofisticación */
+    --color-texto: #333333;
+    /* Gris oscuro para legibilidad */
+}
+
+/* Inicialmente ocultamos la página */
+body {
+    min-width: 900px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    /* Aumenté a 0.8s para hacerlo más suave */
+}
+
+/* Se aplicará con JS después de un pequeño retraso */
+body.visible {
+    opacity: 1;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+main {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    max-width: 800px;
+    margin: auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--color-boton);
+    padding-bottom: 10px;
+}
+
+.logo {
+    width: 120px;
+}
+
+.company-info {
+    text-align: right;
+}
+
+.cotizacion-info {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--color-boton);
+    color: white;
+}
+
+.total {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#volver {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 16px;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all .5s ease;
+}
+
+#volver:hover {
+    background-color: var(--color-boton);
+    color: #FFF
+}
+
+.btn-descargar {
+    display: block;
+    margin: 15px auto;
+    padding: 10px 10px;
+    font-size: 16px;
+    color: white;
+    background-color: var(--color-titulos);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+}
+
+.btn-descargar:hover {
+    background-color: var(--color-boton);
+}

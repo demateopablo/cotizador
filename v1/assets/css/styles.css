@@ -1,0 +1,362 @@
+/* Variables de colores */
+:root {
+    --color-fondo-principal: #e9dcdc;
+    /* Gris medio, aporta solidez */
+    --color-fondo-secundario: #ece3e3;
+    /* Fondo más claro, evita contrastes bruscos */
+    --color-fondo-principal2: #c8c8c8;
+    /* Intermedio entre ambos fondos */
+    --color-boton: #B22222;
+    /* Rojo fuerte pero elegante */
+    --color-titulos: #8B0000;
+    /* Rojo más oscuro, aporta sofisticación */
+    --color-texto: #333333;
+    /* Gris oscuro para legibilidad */
+}
+
+/* Reseteo básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    scrollbar-color: var(--color-boton) var(--color-fondo-principal2);
+    scrollbar-width: thin;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: var(--color-texto);
+    line-height: 1.6;
+    margin: 0;
+    min-width: 400px;
+    background-color: var(--color-fondo-secundario);
+    overflow: hidden;
+}
+
+/* Encabezado */
+#inicio {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100vh;
+    /* Ocupa el 100% del alto de la ventana */
+    background-color: var(--color-fondo-secundario);
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 150px;
+    height: auto;
+}
+
+.btn-cotizar {
+    background-color: var(--color-boton);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-cotizar:hover {
+    background-color: var(--color-titulos);
+}
+
+/* Sección del cotizador */
+#cotizador {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Asegura que el contenido esté alineado arriba */
+    align-items: center;
+    height: 95vh;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+}
+
+#cotizador h2,
+#carrito h2 {
+    color: var(--color-titulos);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+/* Estilo para los productos */
+#lista-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    padding: 20px;
+    min-height: 300px;
+    /* Mantiene el espacio fijo para evitar movimientos */
+    width: 100%;
+    /* Asegura que use todo el ancho disponible */
+    box-sizing: border-box;
+    /* Considera el padding dentro del ancho total */
+    overflow: hidden auto;
+    box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+}
+
+.tarjeta {
+    background-color: var(--color-fondo-principal);
+    border: 1px solid var(--color-boton);
+    border-radius: 5px;
+    padding: 15px;
+    width: 300px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.opcional {
+    background-color: var(--color-fondo-principal2);
+}
+
+.tarjeta h3 {
+    color: var(--color-titulos);
+}
+
+.tarjeta p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+.tarjeta button {
+    background-color: var(--color-boton);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-size: 0.9rem;
+    margin-top: auto;
+    align-self: center;
+}
+
+.tarjeta button:hover {
+    background-color: var(--color-titulos);
+}
+
+.searchDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    gap: 10px;
+    position: relative;
+    margin-bottom: 20px;
+    min-width: 350px;
+}
+
+#buscador {
+    width: 80%;
+    max-width: 600px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid var(--color-boton);
+    border-radius: 5px;
+    background-color: var(--color-fondo-principal);
+    color: var(--color-texto);
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    height: auto;
+    min-width: 250px;
+}
+
+#buscador:focus {
+    border-color: var(--color-titulos);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#buscador::placeholder {
+    color: var(--color-texto);
+    opacity: 0.7;
+}
+
+#emptyCartBtn {
+    margin-left: 10px;
+    padding: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 0;
+}
+
+#emptyCartBtn:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+#emptyCartBtn.hidden {
+    display: none;
+    position: relative;
+}
+
+.cartButton {
+    width: 100px;
+    height: 25px;
+}
+
+.hidden {
+    display: none;
+    opacity: 0;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    margin-top: 25px;
+    background-color: var(--color-fondo-principal2);
+    color: var(--color-titulos);
+    font-size: small;
+    border-top: 1px solid #4A7C59;
+    box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.15);
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--color-texto);
+    margin-left: 4px;
+
+}
+
+main {
+    display: flex;
+}
+
+#carrito {
+    display: flex;
+    width: 450px;
+    min-width: 450px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 0.15);
+    height: 100vh;
+    padding-bottom: 20px;
+    background-color: var(--color-fondo-secundario);
+    padding: 20px;
+}
+
+
+#carritoSection {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#carritoSection li {
+    list-style: none;
+}
+
+#carritoSection #productosSeleccionados {
+    height: 100%;
+    margin-top: 10px;
+    overflow: hidden auto;
+}
+
+#carritoSection li {
+    background-color: var(--color-fondo-principal);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 20px;
+    height: 30px;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-boton);
+    margin: 5px 0 5px
+}
+
+#carritoSection li:hover {
+    background-color: var(--color-fondo-principal2);
+    /* Cambio de fondo al pasar el ratón */
+}
+
+#carritoSection li .cartPrecio {
+    font-weight: bold;
+    /* Para destacar el precio */
+    color: var(--color-boton);
+    /* Color de precio en rojo */
+}
+
+.cartNombre {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    padding-right: 10px;
+}
+
+#carritoSection li .remove-btn {
+    background-color: transparent;
+    border: none;
+    color: var(--color-boton);
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+#carritoSection li .remove-btn:hover {
+    color: var(--color-titulos);
+    /* Cambio de color al pasar el ratón */
+}
+
+.cartTotal {
+    font-weight: bold;
+    color: var(--color-boton);
+    font-size: 1.3em;
+    text-align: right;
+}
+
+#cotizarBtn {
+    text-decoration: none;
+    transition: all .5s ease;
+    background-color: #B2222210;
+    padding: 0 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#cotizarBtn:hover {
+    background-color: #B2222230;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: none;
+}

@@ -1,0 +1,145 @@
+/* Variables */
+:root {
+    --color-fondo: #f9f9f9;
+    --color-boton: #B22222;
+    --color-texto: #333;
+    --color-acento: #8B0000;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--color-boton);
+    color: white;
+    max-height: 80px;
+  }
+
+  header img{
+    height: 80px;
+  }
+  
+  main {
+    display: flex;
+    height: calc(100vh - 164px); /* Resta el espacio del header y footer */
+    overflow: hidden;
+  }
+  
+  #lista-productos {
+    flex: 3; /* Ocupa más espacio */
+    padding: 1rem;
+    overflow-y: auto; /* Añade scroll si hay muchos productos */
+  }
+  
+  #contenedor-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  
+  #buscador{
+    height: 20px;
+    width: 300px;
+    border-radius: 30px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    display: flex;
+    justify-self: center;
+    padding: 8px;
+  }
+  .producto {
+    background-color: white;
+    border: 1px solid var(--color-boton);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .producto:hover {
+    transform: scale(1.02);
+  }
+  
+  #carrito {
+    flex: 1; /* Ocupa menos espacio */
+    background-color: var(--color-fondo);
+    padding: 1rem;
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Añade scroll si hay muchos productos en el carrito */
+  }
+  
+  #productos-seleccionados li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--color-boton);
+  }
+  
+  #productos-seleccionados li button {
+    background: none;
+    border: none;
+    color: var(--color-acento);
+    cursor: pointer;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--color-boton);
+    color: white;
+    height: 20px;
+  }
+
+  #pdf-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: white;
+    color: black;
+    width: 800px; /* Ancho del PDF */
+    margin: 0 auto;
+  }
+  
+  #pdf-container h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  #pdf-container p {
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  
+  #pdf-content {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  #pdf-content ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #pdf-content li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  #pdf-total {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: right;
+  }

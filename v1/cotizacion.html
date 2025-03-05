@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotización</title>
+    <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
+    <script defer src="./assets/js/cotizador.js"></script>
+    <link rel="stylesheet" href="./assets/css/style_cotizacion.css">
+</head>
+
+<body>
+    <main>
+        <header>
+            <img src="./assets/img/logo.png" alt="Logo de la empresa" class="logo">
+            <div class="company-info">
+                <p><strong>Gustavo Perez Maquinarias Agrícolas</strong></p>
+                <p>
+                    <a target="_blank"
+                        href="https://www.google.com/maps/@-38.349735,-59.6129734,3a,70.3y,138.68h,94.98t/data=!3m7!1e1!3m5!1sXbtNYZc1QqKiXYearlAO_g!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-4.982412157171211%26panoid%3DXbtNYZc1QqKiXYearlAO_g%26yaw%3D138.6757250617908!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI1MDEwMi4wIKXMDSoASAFQAw%3D%3D">Av
+                        Independencia 993, San Cayetano, Argentina
+                    </a>
+                </p>
+                <p>Teléfono:
+                    <a target="_blank"
+                        href="https://wa.me/5492983508989?text=Hola%2C%20me%20contacto%20por%20una%20cotización">
+                        +54 9 2983 508989
+                    </a>
+                </p>
+                <p>Email:
+                    <a href="mailto:gustavoperez@gmail.com">
+                        gustavoperez@gmail.com
+                    </a>
+                </p>
+            </div>
+        </header>
+        <section class="cotizacion-info">
+            <p><strong>Fecha:</strong> <span id="fecha"></span></p>
+            <p><strong>Vigencia:</strong> 15 días</p>
+        </section>
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="productos-lista">
+                <!-- Los productos se generarán dinámicamente -->
+            </tbody>
+        </table>
+        <p class="total">Total: <span id="total-precio">$0.00</span></p>
+    </main>
+    <span id="volver">Cerrar cotización</span>
+    <button id="descargarPDF" class="btn-descargar">Descargar PDF</button>
+</body>
+
+</html>

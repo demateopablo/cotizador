@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Landing de cotización de sembradoras y accesorios agrícolas de Gustavo Perez Maquinarias Agrícolas.">
+    <title>Gustavo Perez Maquinarias Agricolas</title>
+    <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <script defer src="./assets/js/script.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo"><img src="./assets/img/logo.png" alt="Gustavo Perez Maquinarias Agricolas"></div>
+        <h1>Artículos</h1>
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Buscar..." autocomplete="off">
+            <button id="clear-search" class="clear-button" title="Borrar búsqueda">
+                <svg class="trash-icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 6H5H21" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path
+                        d="M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6M19 6V20C19 20.5523 18.5523 21 18 21H6C5.44772 21 5 20.5523 5 20V6H19Z"
+                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M10 11V17" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M14 11V17" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+    </header>
+    <main>
+        <!-- Lista de productos -->
+        <section class="product-grid" id="product-grid">
+            <!-- Productos se cargarán dinámicamente con JavaScript -->
+        </section>
+        <button id="toggle-cart" class="cart-toggle">🛒 Ver Carrito</button>
+        <!-- Carrito de cotización -->
+        <aside class="cart hidden">
+            <h2>Carrito de Cotización</h2>
+            <div class="cart-content">
+                <ul id="cart-items">
+                    <!-- Productos añadidos al carrito se mostrarán aquí -->
+                </ul>
+            </div>
+            <div class="cart-total">
+                <strong>Total:</strong> <span id="total">$0,00</span>
+            </div>
+            <div class="cart-actions">
+                <button id="clear-cart" title="Elimina todos los artículos del carrito de cotización.">
+                    <svg class="trash-icon" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 6H5H21" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path
+                            d="M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6M19 6V20C19 20.5523 18.5523 21 18 21H6C5.44772 21 5 20.5523 5 20V6H19Z"
+                            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M10 11V17" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M14 11V17" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    Vaciar Carrito
+                </button>
+
+                <button id="export-pdf" title="Avanza a otra página para confeccionar el PDF.">
+                    <svg class="pdf-icon" viewBox="0 0 512 512" fill="none">
+                        <path fill="#E2E5E7"
+                            d="M128,0c-17.6,0-32,14.4-32,32v448c0,17.6,14.4,32,32,32h320c17.6,0,32-14.4,32-32V128L352,0H128z">
+                        </path>
+                        <path fill="#B0B7BD" d="M384,128h96L352,0v96C352,113.6,366.4,128,384,128z"></path>
+                        <polygon fill="#CAD1D8" points="480,224 384,128 480,128"></polygon>
+                        <path fill="#F15642"
+                            d="M416,416c0,8.8-7.2,16-16,16H48c-8.8,0-16-7.2-16-16V256c0-8.8,7.2-16,16-16h352c8.8,0,16,7.2,16,16 V416z">
+                        </path>
+                        <path fill="#FFFFFF"
+                            d="M101.744,303.152c0-4.224,3.328-8.832,8.688-8.832h29.552c16.64,0,31.616,11.136,31.616,32.48 c0,20.224-14.976,31.488-31.616,31.488h-21.36v16.896c0,5.632-3.584,8.816-8.192,8.816c-4.224,0-8.688-3.184-8.688-8.816V303.152z">
+                        </path>
+                        <path fill="#FFFFFF"
+                            d="M196.656,384c-4.224,0-8.832-2.304-8.832-7.92v-72.672c0-4.592,4.608-7.936,8.832-7.936h29.296 c58.464,0,57.184,88.528,1.152,88.528H196.656z">
+                        </path>
+                        <path fill="#FFFFFF"
+                            d="M303.872,312.112v20.336h32.624c4.608,0,9.216,4.608,9.216,9.072c0,4.224-4.608,7.68-9.216,7.68 h-32.624v26.864c0,4.48-3.184,7.92-7.664,7.92c-5.632,0-9.072-3.44-9.072-7.92v-72.672c0-4.592,3.456-7.936,9.072-7.936h44.912 c5.632,0,8.96,3.344,8.96,7.936c0,4.096-3.328,8.704-8.96,8.704h-37.248V312.112z">
+                        </path>
+                        <path fill="#CAD1D8" d="M400,432H96v16h304c8.8,0,16-7.2,16-16v-16C416,424.8,408.8,432,400,432z">
+                        </path>
+                    </svg>
+                    Exportar a PDF
+                </button>
+
+            </div>
+        </aside>
+        <section class="product-grid" id="optionals-grid">
+            <!-- Opcionales se cargarán dinámicamente con JavaScript -->
+        </section>
+    </main>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modal-text"></p>
+        </div>
+    </div>
+    <!-- toast notification -->
+    <div id="toast-container"></div>
+</body>
+
+</html>
