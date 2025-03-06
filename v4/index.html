@@ -10,10 +10,12 @@
   <h1>404 - El sitio cambió de URL</h1>
   <h3><a href='https://demateopablo.github.io/cotizador/'>Ir al sitio</a></h3>
 </div>
-    <script>
-      $(window).load(function() {
-               window.setTimeout(window.location.href = "https://demateopablo.github.io/cotizador/",50);
-            });
-    </script>
+<script>
+  window.addEventListener("load", function () {
+      setTimeout(() => {
+          window.location.href = "https://demateopablo.github.io/cotizador/";
+      }, 50);
+  });
+</script>
 </body>
 </html>
