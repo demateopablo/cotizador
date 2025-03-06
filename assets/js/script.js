@@ -764,7 +764,7 @@ function mostrarModal(descripcion) {
     const modal = document.getElementById("modal");
     const modalText = document.getElementById("modal-text");
     modalText.innerHTML = descripcion;
-    modal.style.display = "block";
+    modal.style.display = "flex";
 }
 
 // Cerrar el modal al hacer clic en la "x"
@@ -819,3 +819,63 @@ function showToast(message, isError = false) {
     }, 3000);
 }
 
+let helpHTML = `
+<ul>
+
+    <h3>ℹ️ Clic en un Título</h3>
+    <li>
+        <p>Al hacer clic en el título de una máquina, se abrirá un modal con información detallada sobre sus características y especificaciones.</p>
+    </li>
+
+    <h3>🔍 Clic en un Código</h3>
+    <li>
+    <p>Si hacés clic en el código de un producto, se filtrarán automáticamente los productos relacionados a ese artículo.</p>
+    </li>
+    <li>
+        <p>Además, si agregás una máquina al carrito, se mostrarán los opcionales específicos para ese modelo.</p>
+    </li>
+
+    <h3>🛒 Opcionales Automáticos</h3>
+    <li>
+        <p>Cuando agregás una máquina al carrito, los opcionales disponibles para ese modelo se muestran automáticamente en la sección de opcionales, para que puedas agregarlos fácilmente.</p>
+    </li>
+
+    <h3>🎯 Búsqueda Avanzada</h3>
+    <li>
+    <p>Podés buscar productos por cualquier criterio: nombre, versión, código, cantidad de líneas de siembra, metros de chasis y más.</p>
+    </li>
+    <li>
+        <p>Simplemente escribí en la barra de búsqueda para filtrar los resultados en tiempo real.</p>
+    </li>
+
+    <h3>📄 Exportar Cotización</h3>
+    <li>
+        <p>Hacé clic en el botón "Exportar a PDF" para generar un documento con los productos seleccionados y sus precios, listo para compartir.</p>
+    </li>
+
+    <h3>❌ Eliminar un Artículo del Carrito</h3>
+    <li>
+    <p>Para eliminar un artículo del carrito, simplemente pasá el mouse sobre el producto agregado y aparecerá una <strong>❌</strong>.</p>
+    </li>
+    <li>
+    <p>Hacé clic en la <strong>❌</strong> para quitarlo del carrito instantáneamente.</p>
+    </li>
+
+    <h3>🗑️ Vaciar Carrito</h3>
+    <li>
+        <p>Si querés reiniciar la selección, usá el botón "Vaciar Carrito" para eliminar todos los artículos agregados en un solo clic.</p>
+    </li>
+
+    <h3>📌 Acceso Rápido a Opcionales</h3>
+    <li>
+        <p>Si querés agregar opcionales manualmente, filtrá por código en la barra de búsqueda para encontrarlos fácilmente sin necesidad de recorrer toda la lista.</p>
+    </li>
+</ul>
+`
+
+let helpButton = document.getElementById("open-help");
+helpButton.addEventListener("click", mostrarModalAyuda);
+
+function mostrarModalAyuda() {
+    mostrarModal(helpHTML)
+}
