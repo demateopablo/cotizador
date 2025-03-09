@@ -43,7 +43,6 @@ productos.forEach((producto) => {
     tbody.appendChild(row);
 });
 
-
 // Calcular totales
 const iva = subtotal * 0.105;
 const total = subtotal + iva;
@@ -62,72 +61,6 @@ goback_button.addEventListener("click", () => {
 
 // Descargar PDF
 const download_button = document.getElementById("download-pdf");
-
-/* download_button.addEventListener("click", () => {
-    download_button.classList.add('hidden');
-    goback_button.classList.add('hidden');
-
-    const element = document.getElementById("cotizacion");
-    const options = {
-        margin: [120, 30, 30, 30], // Margen superior para el encabezado
-        filename: `Cotizacion ${num_cotizacion.value}.pdf`,
-        html2canvas: { scale: 2 },
-        jsPDF: {
-            unit: "pt",
-            format: "a4",
-            orientation: "portrait",
-        },
-        image: { type: "jpg", quality: 1.0 }, // Mejorar calidad de imagen
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
-    };
-
-    // Función para agregar encabezado y pie de página
-    const addHeaderAndFooter = (pdf) => {
-        const totalPages = pdf.internal.getNumberOfPages();
-        const pageWidth = pdf.internal.pageSize.getWidth();
-        const margin = 30;
-
-        for (let i = 1; i <= totalPages; i++) {
-            pdf.setPage(i);
-
-            // Encabezado
-            pdf.setFontSize(10);
-            pdf.setFont("helvetica", "bold");
-            pdf.text("Gustavo Perez Maquinarias Agrícolas", margin, 40);
-            pdf.setFont("helvetica", "normal");
-            pdf.text("Av Independencia 993", margin, 53);
-            pdf.text("San Cayetano, Argentina", margin, 66);
-            pdf.text("Teléfono: +54 9 2983 508989", margin, 79);
-            pdf.text("Email: gustavoperez@gmail.com", margin, 92);
-
-            // Logo
-            pdf.addImage("./assets/img/logo.png", "PNG", pageWidth - 95 - margin, 30, 100, 40);
-
-            // Pie de página
-            pdf.setFontSize(10);
-            pdf.setFont("helvetica", "normal");
-            pdf.text(`Página ${i} de ${totalPages}`, pageWidth - margin - 50, pdf.internal.pageSize.getHeight() - 20);
-        }
-    };
-
-    // Generar el PDF con encabezados/pies
-    html2pdf()
-        .from(element)
-        .set(options)
-        .toPdf()
-        .get("pdf")
-        .then((pdf) => {
-            addHeaderAndFooter(pdf);
-        })
-        .save()
-        .finally(() => {
-            setTimeout(() => {
-                download_button.classList.remove('hidden');
-                goback_button.classList.remove('hidden');
-            }, 1000);
-        });
-});
- */
 
 document.getElementById("download-pdf").addEventListener("click", () => {
     const { jsPDF } = window.jspdf;
