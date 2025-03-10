@@ -127,8 +127,13 @@
         </div>
     </div>
     <footer>
-        <p>&copy; <span id="year">2025</span> - Powered by <a href="mailto:pablodem32@gmail.com">Pablo Demateo</a></p>
+        <p>&copy; <span id="year"></span> - Powered by Pablo Demateo</p>
+        <p id="emailContact">📧 pablodem32@gmail.com</p>
     </footer>
+    
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 </body>
 
 </html>
