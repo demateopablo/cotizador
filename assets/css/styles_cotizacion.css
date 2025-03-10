@@ -71,6 +71,7 @@ textarea {
     border: 1px solid #ddd;
     border-radius: 5px;
     field-sizing: content;
+    resize: none;
 }
 
 .info-table {
@@ -96,7 +97,7 @@ textarea {
 input[type="text"],
 input[type="date"],
 input[type="email"],
-input[type="number"],
+input[type="tel"],
 select {
     width: 100%;
     padding: 6px;
@@ -134,6 +135,21 @@ select {
 #productos-table th {
     background-color: #e9f5ec;
     font-weight: bold;
+}
+
+.price{
+    width: 100px;
+    -moz-appearance: textfield;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    height: 25px;
+}
+
+.price::-webkit-outer-spin-button,
+.price::-webkit-inner-spin-button{
+    -webkit-appearance: none;
 }
 
 button {
@@ -178,4 +194,28 @@ button:hover {
     stroke: white; /* Mantiene el color del ícono igual al texto */
     stroke-width: 2;
     margin-right: 5px;
+}
+
+footer {
+    text-align: center;
+    background-color: #2e8b57; /* Verde oscuro */
+    color: white;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p{
+    margin: 5px;
+}
+
+footer a {
+    color: #b0ffd5;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }

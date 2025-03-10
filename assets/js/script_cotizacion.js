@@ -26,22 +26,52 @@ const productos = JSON.parse(localStorage.getItem("cart")) || [
 // Renderizar productos en la tabla
 const tbody = document.querySelector("#productos-table tbody");
 let subtotal = 0;
-
 productos.forEach((producto) => {
     const total = producto.quantity * producto.price;
     subtotal += total;
 
     const row = document.createElement("tr");
     row.innerHTML = `
-    <td>${producto.quantity}</td>
+    <td class="quantity">${producto.quantity}</td> <!-- Agregamos una clase para acceder a la cantidad -->
     <td>${producto.code}</td>
     <td>${producto.name}</td>
-    <td>${producto.description === undefined ? `` : `${producto.description}`}</td>
-    <td>${producto.price.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-    <td>${total.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+    <td><textarea>${producto.description || ""}</textarea></td>
+    <td><input class="productPrice price" type="number" value="${producto.price}" min="0"></td>
+    <td><input class="price total" type="number" value="${total}" readonly></td>
   `;
     tbody.appendChild(row);
 });
+
+// Escuchar cambios en los inputs de precio
+document.querySelectorAll(".productPrice").forEach((input) => {
+    input.addEventListener("input", function () {
+        const row = this.closest("tr"); // Obtener la fila actual
+        const quantity = parseFloat(row.querySelector(".quantity").textContent) || 0; // Obtener cantidad desde la celda
+        const newPrice = parseFloat(this.value) || 0; // Obtener nuevo precio
+
+        // Buscar el input del total en la misma fila y actualizarlo
+        const totalInput = row.querySelector(".total");
+        totalInput.value = (quantity * newPrice).toFixed(2);
+
+        // Recalcular totales generales
+        actualizarTotales();
+    });
+});
+
+// Función para recalcular los totales generales
+function actualizarTotales() {
+    let subtotal = 0;
+    document.querySelectorAll(".total").forEach((totalInput) => {
+        subtotal += parseFloat(totalInput.value) || 0;
+    });
+
+    const iva = subtotal * 0.105;
+    const total = subtotal + iva;
+
+    document.getElementById("subtotal").textContent = subtotal.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    document.getElementById("iva").textContent = iva.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    document.getElementById("total").textContent = total.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
 
 // Calcular totales
 const iva = subtotal * 0.105;
@@ -137,9 +167,25 @@ document.getElementById("download-pdf").addEventListener("click", () => {
 
     const finalY = doc.autoTable.previous.finalY;
 
-    // Extraer tabla de productos y convertirla a PDF
+    // Extraer los productos con las descripciones editadas
+    const filas = document.querySelectorAll("#productos-table tbody tr");
+    const productosActualizados = [];
+
+    filas.forEach((fila) => {
+        const cantidad = fila.children[0].textContent;
+        const codigo = fila.children[1].textContent;
+        const nombre = fila.children[2].textContent;
+        const descripcion = fila.children[3].querySelector("textarea").value; // Tomar valor actualizado
+        const precioUnitario = fila.children[4].querySelector("input").value.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const total = fila.children[5].querySelector("input").value.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+        productosActualizados.push([cantidad, codigo, nombre, descripcion, precioUnitario, total]);
+    });
+
+    // Agregar tabla de productos al PDF con datos actualizados
     doc.autoTable({
-        html: "#productos-table", // ID de la tabla HTML
+        head: [["Cantidad", "Código", "Nombre", "Descripción", "Precio Unitario", "Total"]],
+        body: productosActualizados,
         startY: finalY + 10, // Ubicación en la página
         theme: "grid", // Estilo de la tabla
         styles: {

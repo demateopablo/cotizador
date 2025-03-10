@@ -92,7 +92,10 @@ main {
     border: none;
     cursor: pointer;
     transition: all .3s ease;
-    
+    border-radius: 50%;
+    &:hover {
+        background-color: #00000050;
+    }
 }
 
 /* Lista de productos */
@@ -533,4 +536,28 @@ main {
         backdrop-filter: none;
     }
 
+}
+
+footer {
+    text-align: center;
+    background-color: #2e8b57; /* Verde oscuro */
+    color: white;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p{
+    margin: 5px;
+}
+
+footer a {
+    color: #b0ffd5; 
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
