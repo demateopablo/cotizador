@@ -621,7 +621,7 @@ let availableOptionals = [];
 // Función para crear una tarjeta de producto
 function createProductCard(product, version) {
     const descrip = product.descripcion;
-    const card = document.createElement("div");
+    const card = document.createElement("article");
     card.className = "product-card";
 
     card.innerHTML = `
@@ -632,10 +632,10 @@ function createProductCard(product, version) {
         ${version.lineas_separacion !== undefined ? `<p><strong>Lineas de Separación:</strong> ${version.lineas_separacion}</p>` : ""}
         ${version.capacidad !== undefined ? `<p><strong>Capacidad:</strong> ${version.capacidad}</p>` : ""}
         <p class="price"><strong></strong>${version.precio != 0 ? "USD " + version.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }):"Consultar"}</p>
-        <div class="quantity-container">
-        <input class='input-cantidad' title='Cantidad' id="id_${version.codigo}" type="number" min="1" value="1">
-        <button onclick="addToCart('${product.nombre}', '${version.codigo}', ${version.precio},document.getElementById('id_${version.codigo}').value, ${JSON.stringify(product.opcionales)}, '${descrip}')">Añadir al carrito</button>
-        </div>
+        <footer class="quantity-container">
+            <input class='input-cantidad' title='Cantidad' id="id_${version.codigo}" type="number" min="1" value="1">
+            <button onclick="addToCart('${product.nombre}', '${version.codigo}', ${version.precio},document.getElementById('id_${version.codigo}').value, ${JSON.stringify(product.opcionales)}, '${descrip}')">Añadir al carrito</button>
+        </footer>
     `;
 
     return card;
@@ -643,7 +643,7 @@ function createProductCard(product, version) {
 
 // Función para crear una tarjeta de opcional
 function createOptionalCard(opcional) {
-    const card = document.createElement("div");
+    const card = document.createElement("article");
     card.className = "product-card";
 
     card.innerHTML = `
@@ -651,10 +651,10 @@ function createOptionalCard(opcional) {
         <h2 title="${opcional.nombre}">${opcional.nombre}</h2>
         <p><strong>ID:</strong> ${opcional.id}</p>
         <p class="price"><strong>Precio:</strong> $${opcional.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-        <div class="quantity-container">
-        <input class='input-cantidad' title='Cantidad'  id="id_${opcional.id}" type="number" min="1" value="1">
-        <button onclick="addToCart('${opcional.nombre}', '${opcional.id}', ${opcional.precio}, document.getElementById('id_${opcional.id}').value)">Añadir al carrito</button>
-        </div>
+        <footer class="quantity-container">
+            <input class='input-cantidad' title='Cantidad'  id="id_${opcional.id}" type="number" min="1" value="1">
+            <button onclick="addToCart('${opcional.nombre}', '${opcional.id}', ${opcional.precio}, document.getElementById('id_${opcional.id}').value)">Añadir al carrito</button>
+        </footer>
         `;
 
     return card;
@@ -873,8 +873,8 @@ function showToast(message, isError = false) {
 }
 
 let helpHTML = `
+<h2>🚜 Guía de Uso</h2>
 <ul>
-
     <h3>ℹ️ Clic en un Título</h3>
     <li>
         <p>Al hacer clic en el título de una máquina, se abrirá un modal con información detallada sobre sus características y especificaciones.</p>
