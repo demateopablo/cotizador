@@ -12,9 +12,6 @@ const data = {
             <p>CONTROL DE SIEMBRA: Computadora de siembra que permite controlar RPM de la turbina, velocidad de trabajo, área sembrada total y parcial, niveles de insumos (con monitor Sbox 11)</p>`,
             "versiones": [
                 { "codigo": 6630009, "version": "3.16", "chasis": "3 m", "lineas_separacion": "Con 16 abresurcos a 19.1 cm", "precio": 128335, "opc": false },
-                { "codigo": 6630010, "version": "4.20", "chasis": "4 m", "lineas_separacion": "Con 20 abresurcos a 19.1 cm", "precio": 136589, "opc": false },
-                { "codigo": 6630008, "version": "5.26", "chasis": "5 m", "lineas_separacion": "Con 26 abresurcos a 19.1 cm", "precio": 151403, "opc": false },
-                { "codigo": 6630007, "version": "6.32", "chasis": "6 m", "lineas_separacion": "Con 32 abresurcos a 19.1 cm", "precio": 164181, "opc": true },
                 { "codigo": 6630011, "version": "7.36", "chasis": "7 m", "lineas_separacion": "Con 36 abresurcos a 19.1 cm", "precio": 172776, "opc": false },
                 { "codigo": 6630006, "version": "8.42", "chasis": "8 m", "lineas_separacion": "Con 42 abresurcos a 19.1 cm", "precio": 184875, "opc": true },
             ],
@@ -35,7 +32,6 @@ const data = {
             "versiones": [
                 //chasis 10m
                 { "codigo": 6680005, "version": "Mecanica", "chasis": "10 m", "lineas_separacion": "14 a 70", "precio": 190879, "opc": true },
-                { "codigo": 6680001, "version": "Mecanica", "chasis": "10 m", "lineas_separacion": "27 a 35", "precio": 212626, "opc": true },
 
                 { "codigo": 6670005, "version": "Precision Planting Nivel 1", "chasis": "10 m", "lineas_separacion": "14 a 70", "precio": 200311, "opc": true },
                 { "codigo": 6670004, "version": "Precision Planting Nivel 1", "chasis": "10 m", "lineas_separacion": "18 a 52.5", "precio": 206862, "opc": true },
@@ -43,16 +39,7 @@ const data = {
                 //chasis 13m
                 
                 { "codigo": 6670015, "version": "Precision Planting Nivel 1", "chasis": "13 m", "lineas_separacion": "18 a 70", "precio": 214113, "opc": true },
-                { "codigo": 6670014, "version": "Precision Planting Nivel 1", "chasis": "13 m", "lineas_separacion": "24 a 52.5", "precio": 227430, "opc": true },
-                { "codigo": 6670012, "version": "Precision Planting Nivel 1", "chasis": "13 m", "lineas_separacion": "29 a 42", "precio": 240924, "opc": true },
-                { "codigo": 6670013, "version": "Precision Planting Nivel 1", "chasis": "13 m", "lineas_separacion": "32 a 38.2", "precio": 251012, "opc": true },
-                { "codigo": 6670011, "version": "Precision Planting Nivel 1", "chasis": "13 m", "lineas_separacion": "35 a 35", "precio": 255466, "opc": true },
-
                 { "codigo": 6670045, "version": "Precision Planting Nivel 2", "chasis": "13 m", "lineas_separacion": "18 a 70", "precio": 261098, "opc": true },
-                { "codigo": 6670043, "version": "Precision Planting Nivel 2", "chasis": "13 m", "lineas_separacion": "32 a 38.2", "precio": 330809, "opc": true },
-                { "codigo": 6670041, "version": "Precision Planting Nivel 2", "chasis": "13 m", "lineas_separacion": "35 a 35", "precio": 344659, "opc": true },
-
-                { "codigo": 6670065, "version": "Precision Planting Nivel 3", "chasis": "13 m", "lineas_separacion": "18 a 70", "precio": 0, "opc": true }
             ]
         }
         ],
